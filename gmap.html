@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <!-- <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script> -->
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-7 px-0">
+          <div class="card rounded-0">
+            <div class="card-block my-2 mx-2">
+              <h4 class="card-title text-center">Outils</h4>
+              <div id="mapaddress" class="input-group my-3">
+                <input id="autocomplete" type="text" class="form-control" placeholder="Entrez l'adresse de vos locaux...">
+              </div>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-6">
+                    <div id="radiusdiv">
+                      <input id="cercleradius"  data-slider-id="radiusslider" type="text" data-slider-min="50" data-slider-max="1000" data-slider-step="50" data-slider-value="500"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div id="numberdiv">
+                      <input id="limitationnumber"  data-slider-id="numberslider" type="text" data-slider-min="1" data-slider-max="250" data-slider-step="1" data-slider-value="25"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                  <div class="card-footer">
+                    <span id="radiusSliderValLabel">Rayon du cercle : <span id="radiusSliderVal">500</span></span>
+                    <span id="numberSliderValLabel">Nombre de résultat : <span id="numberSliderVal">25</span></span>
+                    <button id="toto"> TOTO</button>
+              </div>
+            </div>
+            <div id="root" class="container-fluid">
+            <!--  REACT -->
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-5 px-0">
+            <div id="map"></div>
+          </div>
+      </div>
+    </div>
+
+
+    <span type="hidden" style="display: none" id="searchdata"></span>
+    <!-- <script type="text/babel" src="js/react-old.js" ></script> -->
+    <script type="text/babel" src="js/react/App.js" ></script>
+    <script type="text/babel" src="js/react/components/Vignette.js" ></script>
+    <script type="text/babel" src="js/react/components/Pagination.js" ></script>
+    <script type="text/babel" src="js/react/components/SearchFilter.js" ></script>
+    <script src=js/googlemap.js></script>
+    <script src=js/script.js></script>
+    <script src='./cfg/config.json'></script>
+    <script type="text/javascript">
+      var googleApiKey = CONFIG.googleApiKey;
+      document.write("<script src='https://maps.googleapis.com/maps/api/js?key="+ googleApiKey + "&libraries=places&callback=initMap' async defer><\/script>");
+    </script>
+  <!--   <script src="https://maps.googleapis.com/maps/api/js?key="+googleApiKey+"&libraries=places&callback=initMap"
+    async defer></script>-->
+
+
+  </body>
+</html>
