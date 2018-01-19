@@ -102,7 +102,8 @@ function getList(lat,lng,nb) {
       //var markerCluster = new MarkerClusterer(map, markers);
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
-        var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
+  //      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
+        var typecommerce = codeNafJSON(i,data.records[i].fields.code_ape);
         console.log(typecommerce);
         contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
     //    console.log(contentMarkers[i]);
