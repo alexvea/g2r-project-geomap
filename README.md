@@ -17,3 +17,10 @@ Les outils utilisés sont les data de Open Data, les Api de google et les langag
 -css
 -HTML
 
+## Procédure d'installation.
+
+Dans le dossier ./cfg :
+- Créer le fichier config.json en prenant comme exemple config-template.json.
+- Ajouter votre clé api google map.
+
+Copier tout le dossier racine, dans le documentroot de votre serveur web.
