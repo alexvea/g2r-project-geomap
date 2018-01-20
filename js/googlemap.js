@@ -71,17 +71,18 @@ function codeNafJSON(id,codenaf) {
 
 }
 
-
-/* trop lent car attend la reponse de l'api
 function getNafIntitule(id,codenaf){
   var infogreffecodenaf = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=nomenclature-dactivites-francaise-naf-rev-2&rows=1&refine.code_naf="+codenaf
-   var data= $.ajax({
-      url: infogreffecodenaf,
-      async: false
-   }).responseJSON;
-   return data.records[0].fields.intitule_naf_65;
-}
-*/
+   $.ajax(infogreffecodenaf, {
+     success: function(data) {
+      console.log(id + "  "+data.records[0].fields.intitule_naf);
+      },
+      error: function() {
+        console.log("error "+id);
+      }
+ });
+};
+
 // Fonction permettant de récuperer les infos de datainfogreffe
 function getList(lat,lng,nb) {
   var contentMarkers = [];
@@ -102,8 +103,8 @@ function getList(lat,lng,nb) {
       //var markerCluster = new MarkerClusterer(map, markers);
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
-  //      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-        var typecommerce = codeNafJSON(i,data.records[i].fields.code_ape);
+        var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
+  //      var typecommerce = codeNafJSON(i,data.records[i].fields.code_ape);
         console.log(typecommerce);
         contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
     //    console.log(contentMarkers[i]);
