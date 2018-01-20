@@ -60,40 +60,29 @@ function ajoutInformationsMarker(marker,data,id) {
   console.log("ajoutinfo marker "+ marker.getPosition());
 });
 }
-// Soucis fonction asynchrone qui ne permet pas d'utiliser un return.
-function getNafIntitule(id,codenaf) {
-  var intitulenaf = "";
-//  var infogreffecodenaf = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=nomenclature-dactivites-francaise-naf-rev-2&rows=1&refine.code_naf="+codenaf
-    var infogreffecodenaf = "./data/code-naf.json"
-   var valeur = $.getJSON(infogreffecodenaf,codenaf,function (data) {
-      if (data =! null) {
-  //      console.log(codenaf);
-        for (i=0; i< valeur.responseJSON.length;i++) {
-              if(valeur.responseJSON[i].fields["code_naf"] == codenaf) {
-                intitulenaf = valeur.responseJSON[i].fields["intitule_naf_65"];
-    //            console.log(intitulenaf);
-                break;
-              };
-        }
-//TODO
-      //  console.log(valeur.responseJSON[0].fields["code_naf"]);
-      //  var valeur = data.records[0].fields.intitule_naf_65;
-      }
-  //    console.log("valeur: "+valeur);
-    });
 
-  }
 
-/* trop lent car attend la reponse de l'api
+//Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
+//A faire en synchrone et asynchrone.
+//la fonction remplace getNafIntitule(), appelé en ligne 105      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
+function codeNafJSON(id,codenaf) {
+
+// à coder par AV et MB
+
+}
+
 function getNafIntitule(id,codenaf){
   var infogreffecodenaf = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=nomenclature-dactivites-francaise-naf-rev-2&rows=1&refine.code_naf="+codenaf
-   var data= $.ajax({
-      url: infogreffecodenaf,
-      async: false
-   }).responseJSON;
-   return data.records[0].fields.intitule_naf_65;
-}
-*/
+   $.ajax(infogreffecodenaf, {
+     success: function(data) {
+      console.log(id + "  "+data.records[0].fields.intitule_naf);
+      },
+      error: function() {
+        console.log("error "+id);
+      }
+ });
+};
+
 // Fonction permettant de récuperer les infos de datainfogreffe
 function getList(lat,lng,nb) {
   var contentMarkers = [];
@@ -115,6 +104,7 @@ function getList(lat,lng,nb) {
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
         var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
+  //      var typecommerce = codeNafJSON(i,data.records[i].fields.code_ape);
         console.log(typecommerce);
         contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
     //    console.log(contentMarkers[i]);
