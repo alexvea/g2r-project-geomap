@@ -24,3 +24,5 @@ Dans le dossier ./cfg :
 - Ajouter votre clé api google map.
 
 Copier tout le dossier racine, dans le documentroot de votre serveur web.
+
+toto
