@@ -1,3 +1,13 @@
 var CONFIG = {
   "googleApiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
+
+
+var configFB = {
+  "apiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "authDomain": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.firebaseapp.com",
+  "databaseURL": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.firebaseio.com",
+  "projectId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "storageBucket": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.appspot.com",
+  "messagingSenderId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+};
