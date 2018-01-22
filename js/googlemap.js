@@ -4,6 +4,7 @@ var paris = {lat: 48.856614, lng: 2.3522219000000177};
 var placeSearch, autocomplete;
 var retval;
 var contentMarkers = [];
+var snapshotCodeNaf = Defiant.getSnapshot(datanaf);
 
 // fonction permettant de zoomer la carte selon la taille du cercle.
 function updateZoom(circle){
@@ -65,11 +66,11 @@ function ajoutInformationsMarker(marker,data,id) {
 //Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
 //A faire en synchrone et asynchrone.
 //la fonction remplace getNafIntitule(), appelé en ligne 105      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-function codeNafJSON(id,codenaf) {
-
-// à coder par AV et MB
-
+function getNafJSON (id,codenaf) {
+intitule = JSON.search(snapshotCodeNaf,  "//fields[code_naf='"+codenaf+"']/intitule_naf");
+return id+ ";"+intitule;
 }
+
 
 function getNafIntitule(id,codenaf){
   var infogreffecodenaf = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=nomenclature-dactivites-francaise-naf-rev-2&rows=1&refine.code_naf="+codenaf
@@ -103,8 +104,8 @@ function getList(lat,lng,nb) {
       //var markerCluster = new MarkerClusterer(map, markers);
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
-        var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-  //      var typecommerce = codeNafJSON(i,data.records[i].fields.code_ape);
+    //    var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
+        var typecommerce = getNafJSON(i,data.records[i].fields.code_ape);
         console.log(typecommerce);
         contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
     //    console.log(contentMarkers[i]);
