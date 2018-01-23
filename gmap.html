@@ -10,6 +10,7 @@
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css" />
@@ -66,10 +67,11 @@
     <script type="text/babel" src="js/react/components/Pagination.js" ></script>
     <script type="text/babel" src="js/react/components/SearchFilter.js" ></script>
     <script type="text/javascript" src="data/code-naf.json"></script>
+    <script src='./cfg/config.json'></script>
     <script src=js/defiant.min.js></script>
     <script src=js/googlemap.js></script>
     <script src=js/script.js></script>
-    <script src='./cfg/config.json'></script>
+    <script src=js/fb.js></script>
     <script type="text/javascript">
       var googleApiKey = CONFIG.googleApiKey;
       document.write("<script src='https://maps.googleapis.com/maps/api/js?key="+ googleApiKey + "&libraries=places&callback=initMap' async defer><\/script>");

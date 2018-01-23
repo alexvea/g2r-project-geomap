@@ -102,13 +102,13 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
 
   getGoogleMapData() {
   //   var searchedData = JSON.parse($("#searchdata").val());
-    if (localStorage.getItem("searchdataLS") == null) {
+    if (sessionStorage.getItem("searchdataLS") == null) {
       setTimeout(() => {
    this.getGoogleMapData()
  }, 500);
     } else {
-        var searchedData = JSON.parse(localStorage.getItem("searchdataLS"));
-        //  console.log(localStorage.getItem('searchdata'));
+        var searchedData = JSON.parse(sessionStorage.getItem("searchdataLS"));
+        //  console.log(sessionStorage.getItem('searchdata'));
         if (JSON.stringify(searchedData) != JSON.stringify(this.state.googleMapData) || this.state.googleMapData == "") {
           this.setState({
             googleMapData: searchedData,
@@ -129,11 +129,11 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
           ObjectAllFalseSelectedVignettes.selected.push(item);
     };
 /*        console.log(ObjectSelectedVignette);
-    localStorage.setItem('SelectedVignettes', JSON.stringify(ObjectSelectedVignette)); */
+    sessionStorage.setItem('SelectedVignettes', JSON.stringify(ObjectSelectedVignette)); */
     this.setState({
       savedSelectedstate: ObjectAllFalseSelectedVignettes,
     });
-    localStorage.setItem("selectedVignettesLS",  JSON.stringify(ObjectAllFalseSelectedVignettes));
+    sessionStorage.setItem("selectedVignettesLS",  JSON.stringify(ObjectAllFalseSelectedVignettes));
   };
 
   setPagesNumber() {
@@ -162,7 +162,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     this.setState ({
       savedSelectedstate: objectSelectedVignettes,
     });
-    localStorage.setItem("selectedVignettesLS",  JSON.stringify(objectSelectedVignettes));
+    sessionStorage.setItem("selectedVignettesLS",  JSON.stringify(objectSelectedVignettes));
   };
 
   handlePaginationClick(event) {
@@ -242,9 +242,9 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
 
 
 
-  var originalSetItem = localStorage.setItem;
-  localStorage.setItem = function() {
-    var event = new Event('localStorageModified');
+  var originalSetItem = sessionStorage.setItem;
+  sessionStorage.setItem = function() {
+    var event = new Event('sessionStorageModified');
     document.dispatchEvent(event);
     originalSetItem.apply(this, arguments);
   }
@@ -256,7 +256,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     );
   };
 
-  document.addEventListener("localStorageModified", storageHandler, false);
+  document.addEventListener("sessionStorageModified", storageHandler, false);
 
 
 
