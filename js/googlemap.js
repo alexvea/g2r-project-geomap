@@ -113,8 +113,8 @@ function getList(lat,lng,nb) {
         contentMarkers.push({id: i, nom: denominationData, type: "Pas de code NAF", adresse: adresse });
       }
     } //for
-
-    localStorage.setItem('searchdataLS', JSON.stringify(contentMarkers));
+    enreGeo();
+    sessionStorage.setItem('searchdataLS', JSON.stringify(contentMarkers));
   /*  document.getElementById('searchdata').value = JSON.stringify(contentMarkers);
     document.getElementById('searchdata').innerHTML = JSON.stringify(contentMarkers); */
     $(".card-pagination > div").removeClass("border");

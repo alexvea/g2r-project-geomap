@@ -14,7 +14,7 @@ class Vignette extends React.Component {
   }
   handleVignetteClick(event) {
     this.props.saveCurrentState(this.props.cle,!this.state.selected);
-//    const CurrentSelectedVignettes = JSON.parse(localStorage.getItem('SelectedVignettes'));
+//    const CurrentSelectedVignettes = JSON.parse(sessionStorage.getItem('SelectedVignettes'));
     const currentState = this.state.selected;
       if (currentState != true) {
          this.setState({ selected: true });
@@ -23,7 +23,7 @@ class Vignette extends React.Component {
           this.setState({selected: false });
 //          CurrentSelectedVignettes.selected[this.props.cle] = false;
       }
-  //    localStorage.setItem('SelectedVignettes', JSON.stringify(CurrentSelectedVignettes));
+  //    sessionStorage.setItem('SelectedVignettes', JSON.stringify(CurrentSelectedVignettes));
   }
   render() {
     return (
