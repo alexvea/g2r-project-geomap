@@ -56,15 +56,19 @@ myRouter.route('/search/:nom/:adresse/')
 							}
 					//	console.log("SSSSSSSS  "+blackList.some(teststring));
 							if(blackList.some(teststring) != true) {
-								sanshttp = url.replace("http://","").replace("https://","").replace(".com","").replace(".fr","");
+								sanshttp = url.replace("http://","").replace("https://","").replace(".com","").replace(".fr","").replace("www.","");
 								sanshttp = sanshttp.split("/")[0];
 								score = stringSimilarity.compareTwoStrings(req.params.nom, sanshttp);
 									switch (true) {
 										case (score==0):
 												console.log("\x1b[31m%s\x1b[0m",score+"  "+req.params.nom+" "+sanshttp+" "+url);
-											break;
+												break;
 										case (score>=0.5):
 												console.log("\x1b[32m%s\x1b[0m",score+"  "+req.params.nom+" "+sanshttp+" "+url);
+												resultat += "url:"+url+",score:"+score+",";
+												break;
+										case (score>=0.2):
+												console.log("\x1b[34m%s\x1b[0m",score+"  "+req.params.nom+" "+sanshttp+" "+url);
 												resultat += "url:"+url+",score:"+score+",";
 												break;
 										default:
