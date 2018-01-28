@@ -79,7 +79,7 @@ function getWebSite(nom,adresse){
 //A faire en synchrone et asynchrone.
 //la fonction remplace getNafIntitule(), appelé en ligne 105      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
 function getNafJSON (id,codenaf) {
-intitule = JSON.search(snapshotCodeNaf,  "//fields[code_naf='"+codenaf+"']/intitule_naf");
+intitule = JSON.search(snapshotCodeNaf,  "//f[c_n='"+codenaf+"']/i_n");
 return id+ ";"+intitule;
 }
 
