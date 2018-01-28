@@ -62,6 +62,18 @@ function ajoutInformationsMarker(marker,data,id) {
 });
 }
 
+function getWebSite(nom,adresse){
+  var searchAPI = "http://127.0.0.1:3000/search/"+nom+"/"+adresse;
+   $.ajax(searchAPI, {
+     success: function(data) {
+       console.log(nom+" "+adresse+"                        "+data);
+      },
+      error: function() {
+        console.log("error ");
+      }
+ });
+};
+
 
 //Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
 //A faire en synchrone et asynchrone.
