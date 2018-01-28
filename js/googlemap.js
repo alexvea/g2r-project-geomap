@@ -101,6 +101,7 @@ function getList(lat,lng,nb) {
       var adresse = data.records[i].fields.adresse+ " " +data.records[i].fields.code_postal+ " " +data.records[i].fields.ville;
         //      console.log(denominationData + " " + positionData);
       addMarker(positionData,denominationData,i);
+      var website = getWebSite(denominationData,adresse);
       //var markerCluster = new MarkerClusterer(map, markers);
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
@@ -112,6 +113,7 @@ function getList(lat,lng,nb) {
       } else {
         contentMarkers.push({id: i, nom: denominationData, type: "Pas de code NAF", adresse: adresse });
       }
+
     } //for
     enreGeo();
     sessionStorage.setItem('searchdataLS', JSON.stringify(contentMarkers));
