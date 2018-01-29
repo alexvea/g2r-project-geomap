@@ -74,13 +74,34 @@ function getWebSite(nom,adresse){
  });
 };
 
+function getSecteur(codenaf){
+    var division = codenaf.substring(0,2);
+    switch (true) {
+      case (division >= 01 && division <= 39):
+          return "INDUSTRIE";
+      break;
+      case (division >= 41 && division <= 43):
+          return "BÂTIMENT-TRAVAUX PUBLICS";
+      break;
+      case (division >= 45 && division <= 47):
+          return "COMMERCE";
+      break;
+      case (division >= 49 && division <= 99):
+          if (division == 56) {
+            return "RESTAURATION";
+          } else {
+            return "SERVICES";
+          }
+      break;
+    };
+};
 
 //Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
 //A faire en synchrone et asynchrone.
 //la fonction remplace getNafIntitule(), appelé en ligne 105      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-function getNafJSON (id,codenaf) {
-intitule = JSON.search(snapshotCodeNaf,  "//f[c_n='"+codenaf+"']/i_n");
-return id+ ";"+intitule;
+function getNafJSON (codenaf) {
+intitule = JSON.search(snapshotCodeNaf,  "//f[c='"+codenaf+"']/i");
+return intitule.toString();
 }
 
 
@@ -118,12 +139,12 @@ function getList(lat,lng,nb) {
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
     //    var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-        var typecommerce = getNafJSON(i,data.records[i].fields.code_ape);
-        console.log(typecommerce);
-        contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
+        var typecommerce = getNafJSON(data.records[i].fields.code_ape);
+        var division = getSecteur(data.records[i].fields.code_ape);
+        contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse });
     //    console.log(contentMarkers[i]);
       } else {
-        contentMarkers.push({id: i, nom: denominationData, type: "Pas de code NAF", adresse: adresse });
+        contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: "", adresse: adresse });
       }
 
     } //for
