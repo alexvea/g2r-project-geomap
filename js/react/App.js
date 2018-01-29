@@ -202,7 +202,6 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     const vignettesToDisplay = this.state.googleMapData;
     for(var k in vignettesToDisplay) {
         if (indexOfFirstTodo <= k && k < indexOfLastTodo) {
-            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} cle={k} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[k]}/>);
             rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={k} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[k]}/>);
         };
     };

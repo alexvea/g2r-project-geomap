@@ -35,8 +35,9 @@ class Vignette extends React.Component {
                 <div className="card-body">
                   <blockquote className="blockquote mb-0">
                     <p>{this.props.adresse}</p>
-                    <p>Numéro tel : </p>
-                    <footer>Site internet : </footer>
+                    <p><u>Activité :</u> {this.props.intitule}</p>
+                    <p><u>Numéro tel :</u> </p>
+                    <footer><u>Site internet :</u> </footer>
                   </blockquote>
                 </div>
               </div>

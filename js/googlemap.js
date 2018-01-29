@@ -139,9 +139,7 @@ function getList(lat,lng,nb) {
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
     //    var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-        var typecommerce = getNafJSON(i,data.records[i].fields.code_ape);
-        console.log(typecommerce);
-        contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
+        var typecommerce = getNafJSON(data.records[i].fields.code_ape);
         var division = getSecteur(data.records[i].fields.code_ape);
         contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse });
     //    console.log(contentMarkers[i]);
