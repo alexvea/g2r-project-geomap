@@ -78,9 +78,9 @@ function getWebSite(nom,adresse){
 //Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
 //A faire en synchrone et asynchrone.
 //la fonction remplace getNafIntitule(), appelé en ligne 105      var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
-function getNafJSON (id,codenaf) {
-intitule = JSON.search(snapshotCodeNaf,  "//f[c_n='"+codenaf+"']/i_n");
-return id+ ";"+intitule;
+function getNafJSON (codenaf) {
+intitule = JSON.search(snapshotCodeNaf,  "//f[c='"+codenaf+"']/i");
+return intitule.toString();
 }
 
 
