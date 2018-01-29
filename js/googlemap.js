@@ -74,6 +74,27 @@ function getWebSite(nom,adresse){
  });
 };
 
+function getSecteur(codenaf){
+    var division = codenaf.substring(0,2);
+    switch (true) {
+      case (division >= 01 && division <= 39):
+          return "INDUSTRIE";
+      break;
+      case (division >= 41 && division <= 43):
+          return "BÂTIMENT-TRAVAUX PUBLICS";
+      break;
+      case (division >= 45 && division <= 47):
+          return "COMMERCE";
+      break;
+      case (division >= 49 && division <= 99):
+          if (division == 56) {
+            return "RESTAURATION";
+          } else {
+            return "SERVICES";
+          }
+      break;
+    };
+};
 
 //Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
 //A faire en synchrone et asynchrone.
@@ -121,9 +142,11 @@ function getList(lat,lng,nb) {
         var typecommerce = getNafJSON(i,data.records[i].fields.code_ape);
         console.log(typecommerce);
         contentMarkers.push({id: i, nom: denominationData, type: typecommerce, adresse: adresse });
+        var division = getSecteur(data.records[i].fields.code_ape);
+        contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse });
     //    console.log(contentMarkers[i]);
       } else {
-        contentMarkers.push({id: i, nom: denominationData, type: "Pas de code NAF", adresse: adresse });
+        contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: "", adresse: adresse });
       }
 
     } //for
