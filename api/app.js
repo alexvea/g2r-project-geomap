@@ -1,5 +1,6 @@
 var express = require('express');
 var stringSimilarity = require('string-similarity');
+var email 	= require('emailjs');
 var hostname = 'localhost';
 var port = 3000;
 var app = express();
@@ -12,6 +13,9 @@ const regexCite = /<cite[^<>]*[^<>]*>[\s\S]*?<\/cite>/g;
 
 
 var myRouter = express.Router();
+
+
+//Fonction googlesearch START
 myRouter.route('/search/:nom/:adresse/')
 .get(function(req,res){
 	res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
@@ -90,6 +94,50 @@ myRouter.route('/search/:nom/:adresse/')
 	  console.log("Error: " + err.message);
 	});
 });
+//Fonction googlesearch END
+
+//fonction email START
+//myRouter.all('/send/:email/:data', function (req, res) {
+myRouter.route('/send/:email/:data/')
+.post(function (req, res) {
+res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+	var listeObject = req.params.data;
+	console.log(typeof(listeObject));
+	var toto= "";
+	var server 	= email.server.connect({
+   user:	"f307f0aa3f1e22",
+   password:"c591c44267d025",
+   host:	"smtp.mailtrap.io",
+   tls:		true,
+	 port: 2525
+});
+
+var message	= {
+   text:	"i hope this works"+toto,
+   from:	"Contact <contact@map-appli.com>",
+   to:		"mailtrap@mailtrap.io",
+   subject:	"Liste des entreprises via map-appli",
+   attachment:
+   [
+      {data:"<html>" + toto +"</html>", alternative:true}
+   ]
+};
+
+// send the message and get a callback with an error or details of the message that was sent
+server.send(message, function(err, message) { console.log(err || message); });
+
+// you can continue to send more messages with successive calls to 'server.send',
+// they will be queued on the same smtp connection
+
+// or you can create a new server connection with 'email.server.connect'
+// to asynchronously send individual emails instead of a queue
+  console.log(req.params.email + "  -- "+req.params.data);
+   res.json(req.params.email + " -- "+req.params.data);
+});
+
+
+//fonction email END
+
 app.use(myRouter);
 app.listen(port, hostname, function(){
 	console.log("Mon serveur fonctionne sur http://"+ hostname +":"+port+"\n");

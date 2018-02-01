@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "emailjs": "^1.0.12",
     "express": "^4.16.2",
     "string-similarity": "^1.2.0"
   }
