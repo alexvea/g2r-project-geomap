@@ -84,7 +84,11 @@ function getSecteur(codenaf){
           return "BÂTIMENT-TRAVAUX PUBLICS";
       break;
       case (division >= 45 && division <= 47):
-          return "COMMERCE";
+          if(codenaf == "4773Z") {
+            return "PHARMACIE";
+          } else {
+            return "COMMERCE";
+          }
       break;
       case (division >= 49 && division <= 99):
           if (division == 56) {
