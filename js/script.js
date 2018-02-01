@@ -10,11 +10,12 @@ $("#limitationnumber").on("slide", function(slideEvt) {
 $("#numberSliderVal").text(slideEvt.value);
 });
 
-
-$("#toto").on("click", function() {
+//onclick pour envoyer la liste d'entreprises via API
+$("#viaEmail").on("click", function() {
   var currentSelectedVignettes = JSON.parse(sessionStorage.getItem("selectedVignettesLS"));
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];
+  if(currentSelectedVignettes != null) {
     for (key in currentSelectedVignettes["selected"]) {
       if (currentSelectedVignettes["selected"][key] == true) {
         dataToSend.push(currentsearchData[key]);
@@ -23,8 +24,17 @@ $("#toto").on("click", function() {
   if(dataToSend.length === 0) {
       console.log("RIEN A ENVOYER !");
   } else {
-      console.log(dataToSend);
-  };
+  var searchAPI = "http://127.0.0.1:3000/send/EMAIL@domain.com"+"/"+JSON.stringify(dataToSend);
+   $.ajax(searchAPI, {
+     success: function(data) {
+       console.log(data);
+      },
+      error: function() {
+        console.log("error ");
+      }
+ });
+};
+}
 });
 
 //AV identification profil. TODO
