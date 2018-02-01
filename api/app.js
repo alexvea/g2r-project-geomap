@@ -97,42 +97,46 @@ myRouter.route('/search/:nom/:adresse/')
 //Fonction googlesearch END
 
 //fonction email START
-//myRouter.all('/send/:email/:data', function (req, res) {
-myRouter.route('/send/:email/:data/')
-.post(function (req, res) {
-res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
-	var listeObject = req.params.data;
-	console.log(typeof(listeObject));
-	var toto= "";
-	var server 	= email.server.connect({
-   user:	"f307f0aa3f1e22",
-   password:"c591c44267d025",
-   host:	"smtp.mailtrap.io",
-   tls:		true,
-	 port: 2525
-});
+myRouter.route('/send/:email/:data/').get(function(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+  var listeString = req.params.data;
 
-var message	= {
-   text:	"i hope this works"+toto,
-   from:	"Contact <contact@map-appli.com>",
-   to:		"mailtrap@mailtrap.io",
-   subject:	"Liste des entreprises via map-appli",
-   attachment:
-   [
-      {data:"<html>" + toto +"</html>", alternative:true}
-   ]
-};
+  var server = email.server.connect({user: configSMTP.user, password: configSMTP.password, host: configSMTP.host, tls: configSMTP.tls, port: configSMTP.port});
 
-// send the message and get a callback with an error or details of the message that was sent
-server.send(message, function(err, message) { console.log(err || message); });
-
-// you can continue to send more messages with successive calls to 'server.send',
-// they will be queued on the same smtp connection
-
-// or you can create a new server connection with 'email.server.connect'
-// to asynchronously send individual emails instead of a queue
-  console.log(req.params.email + "  -- "+req.params.data);
-   res.json(req.params.email + " -- "+req.params.data);
+  var dataTable = "<table style='width:100%'>";
+  dataTable += "<tr>";
+  dataTable += "<th>Nom</th>";
+  dataTable += "<th>Entreprise</th>";
+  dataTable += "<th>Adresse</th>";
+  dataTable += "</tr>";
+  listeObject = JSON.parse(listeString);
+  for (var i in listeObject) {
+    console.log(listeObject[i].nom);
+    console.log(listeObject[i].intitule);
+    console.log(listeObject[i].adresse);
+    dataTable += "<tr>";
+    dataTable += "<td>" + listeObject[i].nom + "</td>";
+    dataTable += "<td>" + listeObject[i].intitule + "</td>";
+    dataTable += "<td>" + listeObject[i].adresse + "</td>";
+    dataTable += "</tr>";
+  }
+  dataTable += "</table>";
+  var message = {
+    text: listeString,
+    from: "Contact <contact@map-appli.com>",
+    to: req.params.email,
+    subject: "Liste des entreprises via map-appli",
+    attachment: [
+      {
+        data: "<html>" + dataTable + "</html>",
+        alternative: true
+      }
+    ]
+  };
+  server.send(message, function(err, message) {
+    console.log(err || message);
+  });
+  res.json(message);
 });
 
 

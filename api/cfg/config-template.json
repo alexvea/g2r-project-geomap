@@ -1,0 +1,7 @@
+var configSMTP =  {
+	 "user":	"xxxxxxxxxxxxxxx",
+	 "password":"xxxxxxxxxxxxxxxxx",
+	 "host":	"xxxxxxxxxxxxxxxxxx",
+	 "tls":		true/false,
+	 "port": 25
+}
