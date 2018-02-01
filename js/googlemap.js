@@ -5,6 +5,40 @@ var placeSearch, autocomplete;
 var retval;
 var contentMarkers = [];
 var snapshotCodeNaf = Defiant.getSnapshot(datanaf);
+var iconBase = "http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin";
+
+var icons = {
+  industrie: {
+    name: "INDUSTRIE",
+    //  icon: iconBase + 'parking_lot_maps.png'
+    icon: iconBase + '|A|4e061a|000000'
+  },
+  batiment: {
+    name: "BATIMENT-TRAVAUX PUBLICS",
+    icon: iconBase + '|B|7b89a5|000000'
+  },
+  pharmacie: {
+    name: "PHARMACIE",
+    icon: iconBase + '|C|00FF00|000000'
+  },
+  commerce: {
+    name: "COMMERCE",
+    icon: iconBase + '|D|FF69B4|000000'
+  },
+  restauration: {
+    name: "RESTAURATION",
+    icon: iconBase + '|E|C80014|000000'
+  },
+  services: {
+    name: "SERVICES",
+    icon: iconBase + '|F|030372|000000'
+  },
+  na: {
+    name: "Pas de code NAF",
+    icon: iconBase + '&chld=pin|Z|FFFFFF|000000'
+  }
+};
+
 
 // fonction permettant de zoomer la carte selon la taille du cercle.
 function updateZoom(circle){
@@ -36,16 +70,21 @@ function deleteMarkers() {
   clearMarkers();
   markers = [];
 }
-function addMarker(location,name,id) {
+function addMarker(location, name, id, division) {
+
+  var iconWithType = JSON.search(icons, '//*[name="'+division+'"]/icon');
+console.log(iconWithType);
   var marker = new google.maps.Marker({
     position: location,
     map: map,
-    id: "marker"+id,
-//    icon: 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin|A|FF69B4|000000',
-//      icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=2.1|0|FF69B4|13|b|'+name.substring(0, 4),
+    id: "marker" + id,
+    //    icon: 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin|A|FF69B4|000000',
+    //      icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=2.1|0|FF69B4|13|b|'+name.substring(0, 4),
+
+    icon: iconWithType[0].replace("&amp;","&"),
     title: name
   });
-  ajoutInformationsMarker(marker,name,id)
+  ajoutInformationsMarker(marker, name, id)
   markers.push(marker);
 }
 
@@ -81,7 +120,7 @@ function getSecteur(codenaf){
           return "INDUSTRIE";
       break;
       case (division >= 41 && division <= 43):
-          return "BÂTIMENT-TRAVAUX PUBLICS";
+          return "BATIMENT-TRAVAUX PUBLICS";
       break;
       case (division >= 45 && division <= 47):
           if(codenaf == "4773Z") {
@@ -97,8 +136,11 @@ function getSecteur(codenaf){
             return "SERVICES";
           }
       break;
+      default:
+      return "NA";
     };
 };
+
 
 //Fonction à créer qui recherche dans ./data/code-naf.json le type d'activité selon le code naf.
 //A faire en synchrone et asynchrone.
@@ -137,8 +179,7 @@ function getList(lat,lng,nb) {
       var positionData = {lat: data.records[i].fields.geolocalisation[0], lng: data.records[i].fields.geolocalisation[1]};
       var adresse = data.records[i].fields.adresse+ " " +data.records[i].fields.code_postal+ " " +data.records[i].fields.ville;
         //      console.log(denominationData + " " + positionData);
-      addMarker(positionData,denominationData,i);
-      var website = getWebSite(denominationData,adresse);
+
       //var markerCluster = new MarkerClusterer(map, markers);
       if (data.records[i].fields.code_ape != null) {
       //  console.log(data.records[i].fields.code_ape);
@@ -148,8 +189,10 @@ function getList(lat,lng,nb) {
         contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse });
     //    console.log(contentMarkers[i]);
       } else {
-        contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: "", adresse: adresse });
+        contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: division, adresse: adresse });
       }
+      addMarker(positionData,denominationData,i,division);
+      var website = getWebSite(denominationData,adresse);
 
     } //for
     enreGeo();
@@ -206,6 +249,7 @@ function initMap() {
     draggable: true,   // permet de bouger le cerle
     radius: 500
   });
+
 
 // Permet de garder le centre après redimensionnement de la fenetre du navigateur
   google.maps.event.addDomListener(window, 'resize', function() {
