@@ -29,6 +29,8 @@ $("#toto").on("click", function() {
 
 //AV identification profil. TODO
 $(document).ready(function() {
+  //verif internet
+  controle();
 });
 
 
@@ -72,3 +74,25 @@ function guid() {
   return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
     s4() + '-' + s4() + s4() + s4();
 }
+
+
+//verif internet
+function IsOnline()
+    {
+        
+      var param = navigator.onLine ; 
+      
+      if (param == false) 
+      {
+        alert("Vous êtes hors ligne");
+      }
+    }
+function controle()
+    {
+    // traitement
+    //alert(navigator.onLine ? "Vous êtes en ligne" : "Vous êtes hors ligne");
+      
+      setInterval(IsOnline,2000); /* rappel après 2 secondes = 2000 millisecondes */
+  }
+
+ 
