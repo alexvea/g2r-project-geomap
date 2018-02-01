@@ -46,13 +46,15 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
   setCurrentDisplayedMarkers(debut,fin) {
     for (let i=0; i<this.state.googleMapData.length; i++) {
       if (markers[i] != null) {
-        markers[i].setOptions({icon: ""});
+  //AV      markers[i].setOptions({icon: ""});
+      markers[i].setOptions({'opacity': 0.3})
       };
     };
     for (let i=debut; i<=fin;i++) {
       if (markers[i] != null) {
 //      console.log(i);
-      markers[i].setOptions({icon: 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin|C|007bff'});
+//AV     markers[i].setOptions({icon: 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin|C|007bff'});
+        markers[i].setOptions({'opacity': 1})
       };
     };
   };
