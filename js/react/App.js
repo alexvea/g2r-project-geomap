@@ -11,6 +11,7 @@ class App extends React.Component {
                           },
     };
     this.handlePaginationClick = this.handlePaginationClick.bind(this);
+    this.handleTypeFilterClick = this.handleTypeFilterClick.bind(this);
   };
   componentWillMount() {
     this.getGoogleMapData();
@@ -196,6 +197,26 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     });
   };
 
+  handleTypeFilterClick(event){
+    console.log(React);
+    //  var FilteredData = JSON.parse(sessionStorage.getItem("FilteredData"));
+      sessionStorage.setItem("FilteredData","");
+      console.log("EEE"+FilteredData);
+      var toFilteredData = [];
+      var CompareData = this.state.googleMapData;
+      console.log(event.target.checked+"  "+event.target.value);
+      if(event.target.checked == true) {
+          for (var i = 0; i < CompareData.length; i++) {
+            if(event.target.value == CompareData[i].division) {
+                toFilteredData.push(CompareData[i]);
+            }
+          }
+
+
+          sessionStorage.setItem("FilteredData",JSON.stringify(toFilteredData.concat(FilteredData)));
+      }
+  }
+
   renderVignettes() {
     var rowsVignette = [];
     var CurrentSelectedVignettes = "";
@@ -210,12 +231,30 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     return rowsVignette;
   };
 
+
+  renderSearchFilter() {
+    var rowsTypeFilter = [];
+    const data = this.state.googleMapData;
+  //  console.log(compressArray(newData));
+    var newData = []
+    for(var k in data) {
+            newData.push(data[k].division);
+    };
+    var dataDivision = compressArray(newData);
+    for(var k in dataDivision) {
+      rowsTypeFilter.push(<SearchFilter division={dataDivision[k].value} quantite={dataDivision[k].count} action={this.handleTypeFilterClick} />);
+    };
+    return rowsTypeFilter;
+  };
+
   render() {
     if(this.state.googleMapData.length > 0) {
       this.setPagesNumber();
       return (
         <div>
-          <SearchFilter />
+          <div className="row">
+            {this.renderSearchFilter()}
+          </div>
           <div className="row">
             {this.renderVignettes()}
           </div>
