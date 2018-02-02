@@ -37,7 +37,7 @@ var icons = {
     icon: iconBase + 'services.png'
   },
   na: {
-    name: "Pas de code NAF",
+    name: "noNAF",
     icon: iconBase + 'pas_code_naf.png'
   }
 };
@@ -76,7 +76,6 @@ function deleteMarkers() {
 function addMarker(location, name, id, division) {
 
   var iconWithType = JSON.search(icons, '//*[name="'+division+'"]/icon');
-console.log(iconWithType);
   var marker = new google.maps.Marker({
     position: location,
     map: map,
@@ -139,8 +138,6 @@ function getSecteur(codenaf){
             return "SERVICES";
           }
       break;
-      default:
-      return "NA";
     };
 };
 
@@ -192,10 +189,11 @@ function getList(lat,lng,nb) {
         contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse });
     //    console.log(contentMarkers[i]);
       } else {
+        var division = "noNAF";
         contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: division, adresse: adresse });
       }
       addMarker(positionData,denominationData,i,division);
-      var website = getWebSite(denominationData,adresse);
+  //    var website = getWebSite(denominationData,adresse);
 
     } //for
     enreGeo();
