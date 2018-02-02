@@ -5,37 +5,40 @@ var placeSearch, autocomplete;
 var retval;
 var contentMarkers = [];
 var snapshotCodeNaf = Defiant.getSnapshot(datanaf);
-var iconBase = "http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin";
+
+var lien = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
+
+var iconBase = lien.replace('gmap.html','img/');
 
 var icons = {
   industrie: {
     name: "INDUSTRIE",
     //  icon: iconBase + 'parking_lot_maps.png'
-    icon: iconBase + '|A|4e061a|000000'
+    icon: iconBase + 'industrie.png'
   },
   batiment: {
     name: "BATIMENT-TRAVAUX PUBLICS",
-    icon: iconBase + '|B|7b89a5|000000'
+    icon: iconBase + 'travaux.png'
   },
   pharmacie: {
     name: "PHARMACIE",
-    icon: iconBase + '|C|00FF00|000000'
+    icon: iconBase + 'pharmacie.png'
   },
   commerce: {
     name: "COMMERCE",
-    icon: iconBase + '|D|FF69B4|000000'
+    icon: iconBase + 'commerce.png'
   },
   restauration: {
     name: "RESTAURATION",
-    icon: iconBase + '|E|C80014|000000'
+    icon: iconBase + 'restauration.png'
   },
   services: {
     name: "SERVICES",
-    icon: iconBase + '|F|030372|000000'
+    icon: iconBase + 'services.png'
   },
   na: {
     name: "Pas de code NAF",
-    icon: iconBase + '&chld=pin|Z|FFFFFF|000000'
+    icon: iconBase + 'pas_code_naf.png'
   }
 };
 
@@ -81,7 +84,7 @@ console.log(iconWithType);
     //    icon: 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin|A|FF69B4|000000',
     //      icon: 'http://chart.apis.google.com/chart?chst=d_map_spin&chld=2.1|0|FF69B4|13|b|'+name.substring(0, 4),
 
-    icon: iconWithType[0].replace("&amp;","&"),
+    icon: iconWithType[0],
     title: name
   });
   ajoutInformationsMarker(marker, name, id)
