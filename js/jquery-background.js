@@ -14,14 +14,13 @@ $.fn.parallaxY = function ( resistance, mouse )
 	$el = $( this );
 	TweenLite.to( $el, 0.3,
 	{
-		rotationY:((mouse.clientX/(window.innerWidth/(100+resistance)))+135)
+		rotationY:((mouse.clientX/(window.innerWidth/(100+resistance)))+135)*1.5
 	});
 
 };
 
-
 $(document).mousemove(function(e) {
-  $('.markers').parallaxY(5, e);
+  $('.markers').parallaxY(100, e);
   $('.clouds').parallaxXY(30, e);
 });
 
