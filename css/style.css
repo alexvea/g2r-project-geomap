@@ -1,3 +1,58 @@
+
+/* DEBUT- CSS pour la vignette et l'information du site internet  */
+.position-div-loader {
+  position: absolute;
+  bottom: 12px;
+  left: 110px;
+}
+.loader {
+  margin: 0;
+  border: 4px solid #f3f3f3;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loader-SERVICES {
+  border-top: 4px solid #000cff;
+}
+.loader-COMMERCE {
+  border-top: 4px solid #e801ff;
+}
+.loader-BATIMENT-TRAVAUX-PUBLICS {
+  border-top: 4px solid #ff7501;
+}
+.loader-RESTAURATION {
+  border-top: 4px solid #ff0101;
+}
+.loader-INDUSTRIE{
+  border-top: 4px solid #707270;
+}
+.loader-PHARMACIE{
+  border-top: 4px solid #06f200;
+}
+.loader-noNAF{
+  border-top: 4px solid #707270;
+}
+.website {
+  position: absolute;
+  bottom: 12px;
+}
+.spacervignette{
+  height:28px;
+  width:5px;
+/*  background-color: black; */
+  float:left;
+  display:inline-block;
+}
+/* FIN- CSS pour la vignette et l'information du site internet  */
+
+
 .typefiltre {
   word-wrap: break-word;
 }

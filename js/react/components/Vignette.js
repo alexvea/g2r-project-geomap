@@ -36,7 +36,9 @@ class Vignette extends React.Component {
                   <blockquote className="mb-0">
                     <p>{this.props.adresse}</p>
                     <p><u>Activité :</u> {this.props.intitule}</p>
-                    <p><u>Site internet :</u> </p>
+                    <div className="spacervignette"></div>
+                    <span id={"toto"+this.props.cle} className="website"><u>Site internet :</u></span><div className={"position-div-loader loader loader-"+this.props.division.replace(" ","-")}></div>
+
                   </blockquote>
                 </div>
               </div>
