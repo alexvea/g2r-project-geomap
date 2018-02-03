@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-database.js"></script>
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header>
+    <div class="container-fluid px-0">
+      <nav class="nav justify-content-center p-2">
+        <a class="nav-link active" href="#">Active</a>
+        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="bo/login.php">Backoffice</a>
+      </nav>
+      <div class="jumbotron rounded-0 mb-0">
+        <div class="container">
+          <h1 class="display-3 text-white">Fluid jumbotron</h1>
+          <hr class="my-4">
+          <p class="lead text-white">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <div id="mapaddress" class="input-group my-3">
+            <input id="autocomplete" type="text" class="form-control" placeholder="Entrez une adresse proche de chez vous...">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center">
+        <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs="  width="140" height="140">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4 text-center">
+        <img class="rounded-circle" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP838rwHwAGlAKFEX6l7QAAAABJRU5ErkJggg=="  width="140" height="140">
+        <h2>Heading</h2>
+        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum..</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4 text-center">
+        <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs="  width="140" height="140">
+        <h2>Heading</h2>
+        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper..</p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+</div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-7 px-0">
+        <div class="card rounded-0">
+          <div class="card-header">
+            <h4 class="card-title text-center">Outils</h4>
+          </div>
+          <div class="card-block my-2 mx-2">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 col-md-6 py-2 text-center">
+                  <div id="radiusdiv">
+                    <input id="cercleradius" data-slider-id="radiusslider" type="text" data-slider-min="50" data-slider-max="1000" data-slider-step="50" data-slider-value="500" />
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 py-2 text-center">
+                  <span id="radiusSliderValLabel">Rayon du cercle : <span id="radiusSliderVal">500</span></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6 py-2 text-center">
+                  <div id="numberdiv">
+                    <input id="limitationnumber" data-slider-id="numberslider" type="text" data-slider-min="1" data-slider-max="250" data-slider-step="1" data-slider-value="25" />
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 py-2 text-center">
+                  <span id="numberSliderValLabel">Nombre de résultats : <span id="numberSliderVal">25</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button id="viaEmail"> TOTO</button>
+          </div>
+
+
+        </div>
+        <!--  REACT START-->
+        <div id="root" class="container-fluid">
+        </div>
+        <!--  REACT END -->
+      </div>
+      <!--  GOOGLE MAP START-->
+      <div class="col-12 col-sm-6 col-md-5 px-0">
+        <div id="map"></div>
+      </div>
+      <!--  GOOGLE MAP END-->
+    </div>
+</div>
+  <script type="text/babel" src="js/react/App.js"></script>
+  <script type="text/babel" src="js/react/components/Vignette.js"></script>
+  <script type="text/babel" src="js/react/components/Pagination.js"></script>
+  <script type="text/babel" src="js/react/components/SearchFilter.js"></script>
+  <script type="text/javascript" src="data/code-naf.min.json"></script>
+  <script src='./cfg/config.json'></script>
+  <script src=js/defiant.min.js></script>
+  <script src=js/googlemap.js></script>
+  <script src=js/script.js></script>
+  <script src=js/fb.js></script>
+  <script type="text/javascript">
+    var googleApiKey = CONFIG.googleApiKey;
+    document.write("<script src='https://maps.googleapis.com/maps/api/js?key=" + googleApiKey + "&libraries=places&callback=initMap' async defer><\/script>");
+  </script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenMax.min.js"></script>
+  <script src="js/jquery-background.js"></script>
+</body>
+<footer>
+  <div class="col-md-12">
+    <ul class="social-network social-circle">
+      <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+      <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+  </div>
+  <p><a href="#">Back to top</a></p>
+  <p>Projet de fin de formation @ <a href="http://g2r-formation.fr/">G2R FORMATION</a></p>
+  <p>Versionning sur <a href="https://github.com/alexvea/g2r-project-geomap"><i class="fa fa-github fa-2x"></i></a></p>
+  <p>Membres du projet : Assia ABED, Jean-Michel LALAGUE, Mamadou BALDE, Alexandre VEA</p>
+</footer>
+
+</html>
