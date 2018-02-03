@@ -3,6 +3,7 @@ class App extends React.Component {
     super();
     this.state = {
       googleMapData: "",
+      googleMapDataFiltered: [],
       elementsParPage: 12,
       nombrePages: 0,
       pageActuelle: 1,
@@ -11,6 +12,7 @@ class App extends React.Component {
                           },
     };
     this.handlePaginationClick = this.handlePaginationClick.bind(this);
+    this.handleTypeFilterClick = this.handleTypeFilterClick.bind(this);
   };
   componentWillMount() {
     this.getGoogleMapData();
@@ -65,7 +67,8 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     switch (true) {
       case this.state.nombrePages == 1:
       debut = 0;
-      fin = this.state.googleMapData.length-1;
+      fin = this.state.googleMapDataFiltered.length-1;
+      console.log("F  "+fin);
       break;
       case this.state.nombrePages >= 1:
         if(this.state.pageActuelle == 1) {
@@ -73,10 +76,10 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
           fin = (this.state.pageActuelle*this.state.elementsParPage) -1;
         } else {
           debut = ((this.state.pageActuelle-1)*this.state.elementsParPage);  // pour pageactuelle=2 debut=12
-          if (this.state.googleMapData.length-debut > 11) {
+          if (this.state.googleMapDataFiltered.length-debut > 11) {
             fin = debut+11
           } else {
-            fin = debut+(this.state.googleMapData.length%this.state.elementsParPage)-1;
+            fin = debut+(this.state.googleMapDataFiltered.length%this.state.elementsParPage)-1;
           };
         };
       break;
@@ -88,7 +91,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
   };
   // Ajout un listener pour chaque vignette.
   addListenerVignettes() {
-    for (let i=0; i<this.state.googleMapData.length;i++ ) {
+    for (let i=0; i<this.state.googleMapDataFiltered.length;i++ ) {
       $("#vignette"+i).off("click");
       $("#vignette"+i).on("click", function() {
         console.log("vignette"+i);
@@ -114,6 +117,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
         if (JSON.stringify(searchedData) != JSON.stringify(this.state.googleMapData) || this.state.googleMapData == "") {
           this.setState({
             googleMapData: searchedData,
+            googleMapDataFiltered: searchedData,
           });
           this.resetSelectedVignette();
       };
@@ -123,7 +127,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
 
 
   resetSelectedVignette() {
-    var nbVignette = this.state.googleMapData.length;
+    var nbVignette = this.state.googleMapDataFiltered.length;
     var ObjectAllFalseSelectedVignettes = {};
     ObjectAllFalseSelectedVignettes.selected = [];
     for (var i=0; i<nbVignette;i++) {
@@ -139,7 +143,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
   };
 
   setPagesNumber() {
-    var nombrePages = Math.ceil(this.state.googleMapData.length/this.state.elementsParPage);
+    var nombrePages = Math.ceil(this.state.googleMapDataFiltered.length/this.state.elementsParPage);
     if (nombrePages != this.state.nombrePages) {
       this.setState({
       nombrePages: nombrePages,
@@ -196,12 +200,34 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     });
   };
 
+handleTypeFilterClick(event) {
+  if (document.querySelector(".typefiltre input:checked") == null) {
+    console.log('null');
+    this.setState({googleMapDataFiltered: this.state.googleMapData});
+  } else {
+    var toFilteredData = [];
+    var CompareData = this.state.googleMapData;
+    var allTypes = document.querySelectorAll(".typefiltre input");
+    for (var i = 0; i < allTypes.length; i++) {
+      if (allTypes[i].checked == true) {
+        var Type = allTypes[i].value;
+        var SearchedDataSnap = Defiant.getSnapshot(CompareData);
+        var FilteredDataOneType = JSON.search(SearchedDataSnap, "//*[division='" + Type + "']");
+        toFilteredData = Object.freeze(toFilteredData.concat(FilteredDataOneType));
+      };
+      this.setState({googleMapDataFiltered: toFilteredData});
+
+    };
+    this.getCurrentDisplayedVignettes();
+  };
+};
+
   renderVignettes() {
     var rowsVignette = [];
     var CurrentSelectedVignettes = "";
     const indexOfLastTodo = this.state.pageActuelle * this.state.elementsParPage;
     const indexOfFirstTodo = indexOfLastTodo - this.state.elementsParPage;
-    const vignettesToDisplay = this.state.googleMapData;
+    const vignettesToDisplay = this.state.googleMapDataFiltered;
     for(var k in vignettesToDisplay) {
         if (indexOfFirstTodo <= k && k < indexOfLastTodo) {
             rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={k} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[k]}/>);
@@ -210,12 +236,36 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     return rowsVignette;
   };
 
+
+renderSearchFilter() {
+  if (this.state.googleMapData == this.state.googleMapDataFiltered) {
+    var allTypes = document.querySelectorAll(".typefiltre input");
+    for (var i = 0; i < allTypes.length; i++) {
+      allTypes[i].checked = false;
+    };
+  }
+
+  var rowsTypeFilter = [];
+  const data = this.state.googleMapData;
+  var newData = []
+  for (var k in data) {
+    newData.push(data[k].division);
+  };
+  var dataDivision = compressArray(newData);
+  for (var k in dataDivision) {
+    rowsTypeFilter.push(<SearchFilter division={dataDivision[k].value} quantite={dataDivision[k].count} action={this.handleTypeFilterClick}/>);
+  };
+  return rowsTypeFilter;
+};
+
   render() {
     if(this.state.googleMapData.length > 0) {
       this.setPagesNumber();
       return (
         <div>
-          <SearchFilter />
+          <div className="row">
+            {this.renderSearchFilter()}
+          </div>
           <div className="row">
             {this.renderVignettes()}
           </div>
