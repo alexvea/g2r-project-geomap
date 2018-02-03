@@ -41,6 +41,14 @@ $("#viaEmail").on("click", function() {
 $(document).ready(function() {
   //verif internet
   controle();
+
+  $(window).scroll(function(){
+    if($(window).scrollTop()<=250){
+      $(".PaginateNav").addClass("toHide");
+    } else {
+      $(".PaginateNav").removeClass("toHide");
+    };
+  });
 });
 
 

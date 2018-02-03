@@ -45,7 +45,12 @@ html, body {
 }
 
 .PaginateNav:hover{
-  opacity:1;
+  opacity:1 !important;
+}
+
+.toHide {
+  opacity:0;
+  z-index:-1;
 }
 
  .shadow {
