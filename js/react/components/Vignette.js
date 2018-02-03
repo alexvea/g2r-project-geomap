@@ -8,7 +8,10 @@ class Vignette extends React.Component {
   };
   componentDidMount() {
     setInterval(
-      () => this.setState({ selected: this.props.savedSelectedstate }),
+      () => {
+        this.setState({ selected: this.props.savedSelectedstate });
+        this.addWebsite();
+      },
       1000
     );
   }
@@ -25,10 +28,13 @@ class Vignette extends React.Component {
       }
   //    sessionStorage.setItem('SelectedVignettes', JSON.stringify(CurrentSelectedVignettes));
   }
+  addWebsite(){
+
+  }
   render() {
     return (
       <div className={"col-12 col-sm-12 col-md-6 col-lg-4 px-1 py-1 card-pagination"} onClick={this.handleVignetteClick}>
-              <div id={"vignette"+this.props.cle} className={"card shadow h-100 w-100"  + (this.state.selected ?  " selectioncss": "")}>
+              <div id={"vignette"+this.props.cle} className={"card shadow h-100 w-100"  + (this.state.selected ?  " selectioncss "+this.props.division: "")}>
                 <div className="card-header p-1">
                   {this.props.name}
                 </div>
@@ -36,7 +42,13 @@ class Vignette extends React.Component {
                   <blockquote className="mb-0">
                     <p>{this.props.adresse}</p>
                     <p><u>Activité :</u> {this.props.intitule}</p>
-                    <p><u>Site internet :</u> </p>
+                    <div className="spacervignette"></div>
+                    <span id={"toto"+this.props.cle} className="website"><u>Site internet :</u></span>
+                    <div className={"position-div-loader " + (this.props.url ? "": " loader "+this.props.division)}>
+                    </div>
+                    <a className={"position-div-loader " + (this.props.url == "NA" ? "disabled": "")} href={(this.props.url == "NA" ? "": this.props.url)}>
+                    <i className={"fa fa-2x " + (this.props.url == "NA" ? "fa-times": ((this.props.url != "" && this.props.url !="NA") ? "fa-link": ""))}></i>
+                    </a>
                   </blockquote>
                 </div>
               </div>
