@@ -268,7 +268,9 @@ renderSearchFilter() {
           <div className="row">
             {this.renderVignettes()}
           </div>
+          <div className="row">
           <Pagination elementsParPage={this.state.elementsParPage} nombrePages={this.state.nombrePages} pageActuelle={this.state.pageActuelle} action={this.handlePaginationClick}/>
+          </div>
         </div>
       );
     } else {

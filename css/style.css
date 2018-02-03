@@ -3,6 +3,7 @@
 }
 
 #map {
+  min-height: 500px;
   height: 100%;
 }
 html, body {
@@ -27,10 +28,24 @@ html, body {
 }
 
 #autocomplete {
-  width: 250px;
+  height: 60px;
+  font-size: 1.2em;
 }
 #root {
   min-height: 1000px;
+}
+
+.PaginateNav{
+  opacity:0.5;
+  width:100%;
+  position:fixed;
+  z-index:9999;
+  bottom:0px;
+  text-align: center
+}
+
+.PaginateNav:hover{
+  opacity:1;
 }
 
  .shadow {
@@ -49,7 +64,8 @@ html, body {
   position: relative;
   background: url(../img/background.jpg) no-repeat center;
   background-size: cover;
-  padding-top: 240px;
+  padding-top: 180px;
+  padding-bottom: 120px;
 }
 
 .ombres {
