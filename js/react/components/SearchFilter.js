@@ -4,7 +4,6 @@ class SearchFilter extends React.Component {
     this.state = {
     };
   };
-
   render() {
     return (
           <div className={"col-12 col-sm-12 col-md-6 col-lg-4 px-3 py-3 typefiltre"}>
