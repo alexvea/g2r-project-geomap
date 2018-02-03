@@ -89,10 +89,10 @@ function guid() {
 //verif internet
 function IsOnline()
     {
-        
-      var param = navigator.onLine ; 
-      
-      if (param == false) 
+
+      var param = navigator.onLine ;
+
+      if (param == false)
       {
         alert("Vous êtes hors ligne");
       }
@@ -101,8 +101,20 @@ function controle()
     {
     // traitement
     //alert(navigator.onLine ? "Vous êtes en ligne" : "Vous êtes hors ligne");
-      
+
       setInterval(IsOnline,2000); /* rappel après 2 secondes = 2000 millisecondes */
   }
 
- 
+
+
+    document.onkeydown = function(e) {
+      if (document.querySelector('.pagination')) {
+        switch (e.keyCode) {
+            case 37:
+                document.querySelector('.pagination > li:first-child > a').click();
+                break;
+            case 39:
+                document.querySelector('.pagination > li:last-child a').click();
+        }
+      }
+    };
