@@ -91,7 +91,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
   };
   // Ajout un listener pour chaque vignette.
   addListenerVignettes() {
-    for (let i=0; i<this.state.googleMapDataFiltered.length;i++ ) {
+    for (let i=0; i<this.state.googleMapData.length;i++ ) {
       $("#vignette"+i).off("click");
       $("#vignette"+i).on("click", function() {
         console.log("vignette"+i);
@@ -230,7 +230,7 @@ handleTypeFilterClick(event) {
     const vignettesToDisplay = this.state.googleMapDataFiltered;
     for(var k in vignettesToDisplay) {
         if (indexOfFirstTodo <= k && k < indexOfLastTodo) {
-            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={k} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[k]}/>);
+            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={vignettesToDisplay[k].id} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[vignettesToDisplay[k].id]}/>);
         };
     };
     return rowsVignette;
