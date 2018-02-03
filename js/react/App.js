@@ -68,7 +68,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
       case this.state.nombrePages == 1:
       debut = 0;
       fin = this.state.googleMapDataFiltered.length-1;
-      console.log("F  "+fin);
+//    console.log("F  "+fin);
       break;
       case this.state.nombrePages >= 1:
         if(this.state.pageActuelle == 1) {
@@ -85,7 +85,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
       break;
       default:
     };
-      console.log("R "+debut+","+fin);
+  //    console.log("R "+debut+","+fin);
       this.setCurrentDisplayedMarkers(debut,fin);
     //  return debut+","+fin;
   };
@@ -94,7 +94,6 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     for (let i=0; i<this.state.googleMapData.length;i++ ) {
       $("#vignette"+i).off("click");
       $("#vignette"+i).on("click", function() {
-        console.log("vignette"+i);
         if (this.classList.contains("selectioncss")){
           markers[i].setOptions({animation: false});
         } else {
@@ -202,7 +201,6 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
 
 handleTypeFilterClick(event) {
   if (document.querySelector(".typefiltre input:checked") == null) {
-    console.log('null');
     this.setState({googleMapDataFiltered: this.state.googleMapData});
   } else {
     var toFilteredData = [];
