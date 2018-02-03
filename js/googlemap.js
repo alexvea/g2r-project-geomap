@@ -7,8 +7,9 @@ var contentMarkers = [];
 var snapshotCodeNaf = Defiant.getSnapshot(datanaf);
 
 var lien = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;
-
-var iconBase = lien.replace('gmap0.html','img/');
+var indexLienArray = window.location.pathname.split("/");
+var indexLien= indexLienArray[indexLienArray.length-1];
+var iconBase = lien.replace(indexLien,'img/');
 
 var icons = {
   industrie: {
