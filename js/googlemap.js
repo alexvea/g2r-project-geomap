@@ -18,7 +18,7 @@ var icons = {
     icon: iconBase + 'industrie.png'
   },
   batiment: {
-    name: "BATIMENT-TRAVAUX PUBLICS",
+    name: "BATIMENT-TRAVAUX-PUBLICS",
     icon: iconBase + 'travaux.png'
   },
   pharmacie: {
@@ -38,7 +38,7 @@ var icons = {
     icon: iconBase + 'services.png'
   },
   na: {
-    name: "noNAF",
+    name: "NO-NAF",
     icon: iconBase + 'pas_code_naf.png'
   }
 };
@@ -138,7 +138,7 @@ function getSecteur(codenaf){
           return "INDUSTRIE";
       break;
       case (division >= 41 && division <= 43):
-          return "BATIMENT-TRAVAUX PUBLICS";
+          return "BATIMENT-TRAVAUX-PUBLICS";
       break;
       case (division >= 45 && division <= 47):
           if(codenaf == "4773Z") {
@@ -205,7 +205,7 @@ function getList(lat,lng,nb) {
         contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse, url:"", score:"" });
     //    console.log(contentMarkers[i]);
       } else {
-        var division = "noNAF";
+        var division = "NO-NAF";
         contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: division, adresse: adresse, url:"", score:"" });
       }
       addMarker(positionData,denominationData,i,division);
