@@ -25,7 +25,7 @@ class Pagination extends React.Component {
     if (this.props.nombrePages > 1) {
       return (
       <nav className="PaginateNav mx-auto" aria-label="Page navigation example">
-          <ul id="page-numbers" className="pagination justify-content-center">
+          <ul id="page-numbers" className="pagination justify-content-center mb-1">
           <li className="page-item" ><a className="prev page-link" id="-1" onClick={this.props.action}><i id="-1" class="fa fa-arrow-left"></i></a></li>
                   {this.makeRenderPageNumbers()}
           <li className="page-item"><a className="next page-link" id="-2" onClick={this.props.action}><i id="-2" class="fa fa-arrow-right"></i></a></li>

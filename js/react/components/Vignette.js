@@ -29,14 +29,13 @@ class Vignette extends React.Component {
     return (
       <div className={"col-12 col-sm-12 col-md-6 col-lg-4 px-1 py-1 card-pagination"} onClick={this.handleVignetteClick}>
               <div id={"vignette"+this.props.cle} className={"card shadow h-100 w-100"  + (this.state.selected ?  " selectioncss": "")}>
-                <div className="card-header">
+                <div className="card-header p-1">
                   {this.props.name}
                 </div>
-                <div className="card-body">
-                  <blockquote className="blockquote mb-0">
+                <div className="card-body p-2">
+                  <blockquote className="mb-0">
                     <p>{this.props.adresse}</p>
                     <p><u>Activité :</u> {this.props.intitule}</p>
-                    <p><u>Numéro tel :</u> </p>
                     <p><u>Site internet :</u> </p>
                   </blockquote>
                 </div>
