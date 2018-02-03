@@ -18,25 +18,25 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-.loader-SERVICES {
+.SERVICES {
   border-top: 4px solid #000cff;
 }
-.loader-COMMERCE {
+.COMMERCE {
   border-top: 4px solid #e801ff;
 }
-.loader-BATIMENT-TRAVAUX-PUBLICS {
+.BATIMENT-TRAVAUX-PUBLICS {
   border-top: 4px solid #ff7501;
 }
-.loader-RESTAURATION {
+.RESTAURATION {
   border-top: 4px solid #ff0101;
 }
-.loader-INDUSTRIE{
+.INDUSTRIE{
   border-top: 4px solid #707270;
 }
-.loader-PHARMACIE{
+.PHARMACIE{
   border-top: 4px solid #06f200;
 }
-.loader-noNAF{
+.noNAF{
   border-top: 4px solid #707270;
 }
 .website {

@@ -28,7 +28,7 @@ class Vignette extends React.Component {
   render() {
     return (
       <div className={"col-12 col-sm-12 col-md-6 col-lg-4 px-1 py-1 card-pagination"} onClick={this.handleVignetteClick}>
-              <div id={"vignette"+this.props.cle} className={"card shadow h-100 w-100"  + (this.state.selected ?  " selectioncss": "")}>
+              <div id={"vignette"+this.props.cle} className={"card shadow h-100 w-100"  + (this.state.selected ?  " selectioncss "+this.props.division.replace(" ","-"): "")}>
                 <div className="card-header p-1">
                   {this.props.name}
                 </div>
@@ -37,7 +37,7 @@ class Vignette extends React.Component {
                     <p>{this.props.adresse}</p>
                     <p><u>Activité :</u> {this.props.intitule}</p>
                     <div className="spacervignette"></div>
-                    <span id={"toto"+this.props.cle} className="website"><u>Site internet :</u></span><div className={"position-div-loader loader loader-"+this.props.division.replace(" ","-")}></div>
+                    <span id={"toto"+this.props.cle} className="website"><u>Site internet :</u></span><div className={"position-div-loader loader "+this.props.division.replace(" ","-")}></div>
 
                   </blockquote>
                 </div>
