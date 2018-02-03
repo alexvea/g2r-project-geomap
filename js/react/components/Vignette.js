@@ -37,7 +37,7 @@ class Vignette extends React.Component {
                     <p>{this.props.adresse}</p>
                     <p><u>Activité :</u> {this.props.intitule}</p>
                     <p><u>Numéro tel :</u> </p>
-                    <footer><u>Site internet :</u> </footer>
+                    <p><u>Site internet :</u> </p>
                   </blockquote>
                 </div>
               </div>
