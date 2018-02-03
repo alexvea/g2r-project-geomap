@@ -46,17 +46,18 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
 
 
   setCurrentDisplayedMarkers(debut,fin) {
+    var vignetteList = this.state.googleMapDataFiltered;
     for (let i=0; i<this.state.googleMapData.length; i++) {
       if (markers[i] != null) {
-  //AV      markers[i].setOptions({icon: ""});
       markers[i].setOptions({'opacity': 0.3})
       };
     };
     for (let i=debut; i<=fin;i++) {
-      if (markers[i] != null) {
+      var vignetteId = vignetteList[i].id;
+      if (markers[vignetteId] != null) {
 //      console.log(i);
 //AV     markers[i].setOptions({icon: 'http://chart.apis.google.com/chart?chst=d_map_xpin_letter&chld=pin|C|007bff'});
-        markers[i].setOptions({'opacity': 1})
+        markers[vignetteId].setOptions({'opacity': 1})
       };
     };
   };
@@ -68,7 +69,7 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
       case this.state.nombrePages == 1:
       debut = 0;
       fin = this.state.googleMapDataFiltered.length-1;
-      console.log("F  "+fin);
+//    console.log("F  "+fin);
       break;
       case this.state.nombrePages >= 1:
         if(this.state.pageActuelle == 1) {
@@ -85,16 +86,15 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
       break;
       default:
     };
-      console.log("R "+debut+","+fin);
+  //    console.log("R "+debut+","+fin);
       this.setCurrentDisplayedMarkers(debut,fin);
     //  return debut+","+fin;
   };
   // Ajout un listener pour chaque vignette.
   addListenerVignettes() {
-    for (let i=0; i<this.state.googleMapDataFiltered.length;i++ ) {
+    for (let i=0; i<this.state.googleMapData.length;i++ ) {
       $("#vignette"+i).off("click");
       $("#vignette"+i).on("click", function() {
-        console.log("vignette"+i);
         if (this.classList.contains("selectioncss")){
           markers[i].setOptions({animation: false});
         } else {
@@ -202,7 +202,6 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
 
 handleTypeFilterClick(event) {
   if (document.querySelector(".typefiltre input:checked") == null) {
-    console.log('null');
     this.setState({googleMapDataFiltered: this.state.googleMapData});
   } else {
     var toFilteredData = [];
@@ -230,7 +229,7 @@ handleTypeFilterClick(event) {
     const vignettesToDisplay = this.state.googleMapDataFiltered;
     for(var k in vignettesToDisplay) {
         if (indexOfFirstTodo <= k && k < indexOfLastTodo) {
-            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={k} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[k]}/>);
+            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={vignettesToDisplay[k].id} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[vignettesToDisplay[k].id]}/>);
         };
     };
     return rowsVignette;
