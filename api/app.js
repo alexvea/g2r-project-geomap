@@ -95,15 +95,16 @@ myRouter.route('/search/:nom/:adresse/').get(function(req, res) {
                     break;
                   case(score >= 0.5):
                     console.log("\x1b[32m%s\x1b[0m", score + "  " + req.params.nom + " " + sanshttp + " " + url);
-                    resultat += "url:" + url + ",score:" + score + ",";
+                  //  resultat += "url:" + url + ",score:" + score + ",";
+                  resultat = "{\"url\":\"" + url + "\",\"score\":\"" + score +"\",";
                     break;
                   case(score >= 0.2):
                     console.log("\x1b[34m%s\x1b[0m", score + "  " + req.params.nom + " " + sanshttp + " " + url);
-                    resultat += "url:" + url + ",score:" + score + ",";
+          //          resultat += "url:" + url + ",score:" + score + ",";
                     break;
                   default:
                     console.log("\x1b[37m%s\x1b[0m", score + "  " + req.params.nom + " " + sanshttp + " " + url);
-                    resultat += "url:" + url + ",score:" + score + ",";
+            //        resultat += "url:" + url + ",score:" + score + ",";
                 }
               }
             });
