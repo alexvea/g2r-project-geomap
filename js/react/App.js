@@ -229,7 +229,7 @@ handleTypeFilterClick(event) {
     const vignettesToDisplay = this.state.googleMapDataFiltered;
     for(var k in vignettesToDisplay) {
         if (indexOfFirstTodo <= k && k < indexOfLastTodo) {
-            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={vignettesToDisplay[k].id} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[vignettesToDisplay[k].id]}/>);
+            rowsVignette.push(<Vignette key={k} name={vignettesToDisplay[k].nom} adresse={vignettesToDisplay[k].adresse} intitule={vignettesToDisplay[k].intitule} division={vignettesToDisplay[k].division} cle={vignettesToDisplay[k].id} url={vignettesToDisplay[k].url}  score={vignettesToDisplay[k].score} saveCurrentState={this.saveCurrentState.bind(this)} savedSelectedstate={this.state.savedSelectedstate.selected[vignettesToDisplay[k].id]}/>);
         };
     };
     return rowsVignette;

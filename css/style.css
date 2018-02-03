@@ -2,7 +2,7 @@
 /* DEBUT- CSS pour la vignette et l'information du site internet  */
 .position-div-loader {
   position: absolute;
-  bottom: 12px;
+  bottom: 10px;
   left: 110px;
 }
 .loader {
@@ -51,7 +51,11 @@
   display:inline-block;
 }
 /* FIN- CSS pour la vignette et l'information du site internet  */
-
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+   color: grey;
+}
 
 .typefiltre {
   word-wrap: break-word;
