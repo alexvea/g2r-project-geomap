@@ -42,13 +42,21 @@ $(document).ready(function() {
   //verif internet
   controle();
 
-  $(window).scroll(function(){
-    if($(window).scrollTop()<=250){
+  $(window).scroll(function() {
+    if ($(window).scrollTop() <= 250) {
       $(".PaginateNav").addClass("toHide");
     } else {
       $(".PaginateNav").removeClass("toHide");
     };
   });
+
+  $("#toTop").on("click", function() {
+    console.log("tototo");
+    $("html, body").animate({
+      scrollTop: 0
+    }, 600);
+  });
+
 });
 
 
