@@ -104,17 +104,32 @@ function ajoutInformationsMarker(marker,data,id) {
 });
 }
 
-function getWebSite(nom,adresse){
+function getWebSite(nom,adresse,id){
   var searchAPI = "http://127.0.0.1:3000/search/"+nom+"/"+adresse;
    $.ajax(searchAPI, {
      success: function(data) {
-       console.log(nom+" "+adresse+"                        "+data);
-      },
+        ajoutInfoSearchData(id,data);
+        },
       error: function() {
         console.log("error ");
       }
  });
 };
+
+function ajoutInfoSearchData(id, data) {
+  var currentData = JSON.parse(sessionStorage.getItem("searchdataLS"));
+  if (data == "{}") {
+    currentData[id].url = "NA";
+    currentData[id].score = "NA";
+  } else {
+    var dataJSON = JSON.parse(data);
+    var url = dataJSON['url'];
+    var score = dataJSON['score'];
+    currentData[id].url = url;
+    currentData[id].score = score;
+  }
+  sessionStorage.setItem("searchdataLS",JSON.stringify(currentData));
+}
 
 function getSecteur(codenaf){
     var division = codenaf.substring(0,2);
@@ -187,14 +202,14 @@ function getList(lat,lng,nb) {
     //    var typecommerce = getNafIntitule(i,data.records[i].fields.code_ape);
         var typecommerce = getNafJSON(data.records[i].fields.code_ape);
         var division = getSecteur(data.records[i].fields.code_ape);
-        contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse });
+        contentMarkers.push({id: i, nom: denominationData, intitule: typecommerce, division: division ,adresse: adresse, url:"", score:"" });
     //    console.log(contentMarkers[i]);
       } else {
         var division = "noNAF";
-        contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: division, adresse: adresse });
+        contentMarkers.push({id: i, nom: denominationData, intitule: "Pas de code NAF", division: division, adresse: adresse, url:"", score:"" });
       }
       addMarker(positionData,denominationData,i,division);
-  //    var website = getWebSite(denominationData,adresse);
+      var website = getWebSite(denominationData,adresse,i);
 
     } //for
     enreGeo();
