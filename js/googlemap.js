@@ -108,6 +108,7 @@ function getWebSite(nom, adresse, id) {
       ajoutInfoSearchData(id, data);
     },
     error: function() {
+      console.log("Erreur de connexion avec l'API localhost");
     }
   });
 };
