@@ -51,7 +51,6 @@ $(document).ready(function() {
   });
 
   $("#toTop").on("click", function() {
-    console.log("tototo");
     $("html, body").animate({
       scrollTop: 0
     }, 600);
