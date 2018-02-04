@@ -271,3 +271,13 @@ ul a {
  background-color: #D3D3D3;
 }
 /* footer social icons END */
+
+/* 3 STEPS explanation START */
+.step-icons {
+  position: absolute;
+  top:50px;
+  left:0;
+  width: 100%;
+  margin: 0 auto;
+}
+/* 3 STEPS explanation END */
