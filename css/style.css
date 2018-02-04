@@ -1,3 +1,9 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 3rem;
+}
 
 /* DEBUT- CSS pour la vignette et l'information du site internet  */
 .position-div-loader {
@@ -51,26 +57,12 @@
   display:inline-block;
 }
 /* FIN- CSS pour la vignette et l'information du site internet  */
-a.disabled {
-   pointer-events: none;
-   cursor: default;
-   color: grey;
-}
 
-.typefiltre {
-  word-wrap: break-word;
-}
 
-#map {
-  min-height: 500px;
-  height: 100%;
-}
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 3rem;
-}
+
+
+
+/*  sliders START */
 #radiusslider .slider-handle  {
 	background: #007bff;
 }
@@ -86,10 +78,22 @@ html, body {
 	background: #d34836;
 }
 
+/*  sliders END */
+/* googlemap START */
 #autocomplete {
   height: 60px;
   font-size: 1.2em;
 }
+#map {
+  min-height: 500px;
+  height: 100%;
+}
+#mapaddress, .jumbotron {
+  z-index: 9;
+}
+/* googlemap END */
+
+/*React START */
 #root {
   min-height: 1000px;
 }
@@ -112,6 +116,21 @@ html, body {
   z-index:-1;
 }
 
+a.disabled {
+   pointer-events: none;
+   cursor: default;
+   color: grey;
+}
+
+.typefiltre {
+  word-wrap: break-word;
+}
+/* React END */
+
+/* megaban START */
+header {
+  padding-bottom: 50px;
+}
  .shadow {
   transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -136,10 +155,6 @@ html, body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#mapaddress, .jumbotron {
-  z-index: 9;
-}
-
 .clouds{
   position: absolute;
   top: 0;
@@ -150,9 +165,7 @@ html, body {
   opacity: 0.8;
 }
 
-header {
-  padding-bottom: 50px;
-}
+/* megaban END */
 
 /* actions icons START */
 .action-icons:hover {
@@ -160,6 +173,7 @@ header {
 }
 .action-icons {
   color: grey;
+  padding-left: 15px;
 }
 
 /* actions icons END */
