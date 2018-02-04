@@ -9,6 +9,7 @@
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-auth.js"></script>
@@ -107,6 +108,29 @@
       <!--  GOOGLE MAP END-->
     </div>
   </div>
+
+  <!-- Modals START -->
+ <!-- No internet modal START-->
+  <div class="modal fade" id="noInternet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" ><i class="fa fa-unlink"></i> Connexion perdue !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Vous n'avez plus internet... veuillez régler le problème avant d'utiliser l'application.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- No internet modal END-->
+  <!-- Modals END -->
   <script src="js/array_duplicate_counter.js"></script>
   <script type="text/babel" src="js/react/App.js"></script>
   <script type="text/babel" src="js/react/components/Vignette.js"></script>

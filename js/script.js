@@ -109,7 +109,7 @@ function IsOnline()
 
       if (param == false)
       {
-        alert("Vous êtes hors ligne");
+        $('#noInternet').modal('show');
       }
     }
 function controle()
