@@ -153,6 +153,7 @@ class App extends React.Component {
 
   checkFilteredData() {
     if (document.querySelector(".typefiltre input:checked") == null) {
+      $("#viaEmail").removeClass('fa-beat');
       var CompareData = this.state.googleMapData;
       var allTypes = document.querySelectorAll('.typefiltre input:not([value="SELECTION"])');
       for (var i = 0; i < allTypes.length; i++) {
@@ -189,6 +190,7 @@ class App extends React.Component {
           let objectSelectedVignettes = this.state.savedSelectedstate;
           for (var i = 0; i < objectSelectedVignettes['selected'].length; i++) {
             if (objectSelectedVignettes['selected'][i] == true) {
+              $("#viaEmail").addClass('fa-beat');
               let vignetteId = i;
               var FilteredDataOneType = JSON.search(SearchedDataSnap, "//*[id=" + vignetteId + "]");
               toFilteredData = Object.freeze(toFilteredData.concat(FilteredDataOneType));
