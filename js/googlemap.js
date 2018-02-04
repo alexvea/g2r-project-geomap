@@ -106,6 +106,7 @@ function ajoutInformationsMarker(marker,data,id) {
 
 function getWebSite(nom,adresse,id){
   var searchAPI = "http://127.0.0.1:3000/search/"+nom+"/"+adresse;
+//test synchrone  $.ajaxSetup({async: false});
    $.ajax(searchAPI, {
      success: function(data) {
         ajoutInfoSearchData(id,data);
