@@ -322,6 +322,9 @@ var autocomplete = new google.maps.places.Autocomplete(
   {types: ['geocode']});
 
 var onChangeHandler = function() {
+  $("html").animate({
+        scrollTop:  $(".tools").offset().top
+  }, 600);
   var nombre = parseInt(document.getElementById('limitationnumber').value);
   var geocoder = new google.maps.Geocoder();
   var address = document.getElementById('autocomplete').value;
