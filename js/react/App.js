@@ -30,6 +30,11 @@ class App extends React.Component {
       () => this.getCurrentDisplayedVignettes(),
       500
     );
+    setInterval(
+      () => this.checkFilteredData(),
+      600
+    );
+
     this.resetSelectedVignette();
 
   };
@@ -175,11 +180,6 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     var numero = 0;
     var numBouton = Number(event.target.id);
     var pageActuelle = this.state.pageActuelle;
-    /*TODO déplacement de la page quand clic sur pagination
-   //  console.log(window.innerHeight + " " + document.querySelector(".PaginateNav").offsetTop );
-    if ((document.querySelector(".PaginateNav").offsetTop - window.innerHeight) < 400) {
-      console.log((document.querySelector(".PaginateNav").offsetTop - window.innerHeight));
-    }*/
     if (numBouton == "-1") {
       if ((pageActuelle - 1) != 0) {
         numero = pageActuelle - 1;
@@ -200,23 +200,61 @@ console.log("TTOOO  " + this.getCurrentDisplayedVignettes());
     });
   };
 
+checkFilteredData() {
+  if (document.querySelector(".typefiltre input:checked") == null) {
+    var CompareData = this.state.googleMapData;
+    var allTypes = document.querySelectorAll('.typefiltre input:not([value="SELECTION"])');
+    for (var i = 0; i < allTypes.length; i++) {
+      allTypes[i].disabled = false;
+      allTypes[i].hidden = false;
+    }
+    this.setState({googleMapDataFiltered: this.state.googleMapData});
+  }
+
+}
 handleTypeFilterClick(event) {
   if (document.querySelector(".typefiltre input:checked") == null) {
+    var allTypes = document.querySelectorAll('.typefiltre input:not([value="SELECTION"])');
+    for (var i = 0; i < allTypes.length; i++) {
+      allTypes[i].disabled = false;
+      allTypes[i].hidden = false;
+    }
     this.setState({googleMapDataFiltered: this.state.googleMapData});
   } else {
     var toFilteredData = [];
     var CompareData = this.state.googleMapData;
-    var allTypes = document.querySelectorAll(".typefiltre input");
+    var allTypes = document.querySelectorAll('.typefiltre input:not([value="SELECTION"])');
+    var typeSelection = document.querySelectorAll('.typefiltre input[value="SELECTION"]');
+    var SearchedDataSnap = Defiant.getSnapshot(CompareData);
+    if ((typeSelection.length != 0)) {
+      if (typeSelection[0].checked == true) {
+        for (var i = 0; i < allTypes.length; i++) {
+          allTypes[i].disabled = true;
+          allTypes[i].hidden = true;
+          allTypes[i].checked = false;
+        }
+        typeSelection[0].disabled = false;
+        typeSelection[0].hidden = false;
+        let objectSelectedVignettes = this.state.savedSelectedstate;
+        for (var i = 0; i < objectSelectedVignettes['selected'].length; i++) {
+          if (objectSelectedVignettes['selected'][i] == true) {
+            let vignetteId = i;
+            var FilteredDataOneType = JSON.search(SearchedDataSnap, "//*[id=" + vignetteId + "]");
+            toFilteredData = Object.freeze(toFilteredData.concat(FilteredDataOneType));
+          }
+        }
+      }
+    }
+
     for (var i = 0; i < allTypes.length; i++) {
       if (allTypes[i].checked == true) {
         var Type = allTypes[i].value;
-        var SearchedDataSnap = Defiant.getSnapshot(CompareData);
         var FilteredDataOneType = JSON.search(SearchedDataSnap, "//*[division='" + Type + "']");
         toFilteredData = Object.freeze(toFilteredData.concat(FilteredDataOneType));
       };
-      this.setState({googleMapDataFiltered: toFilteredData});
-
     };
+
+    this.setState({googleMapDataFiltered: toFilteredData});
     this.getCurrentDisplayedVignettes();
   };
 };
@@ -254,6 +292,16 @@ renderSearchFilter() {
   for (var k in dataDivision) {
     rowsTypeFilter.push(<SearchFilter division={dataDivision[k].value} quantite={dataDivision[k].count} action={this.handleTypeFilterClick}/>);
   };
+  let objectSelectedVignettes = this.state.savedSelectedstate;
+  var nbSelectedVignette = 0;
+  for (var i = 0; i < objectSelectedVignettes['selected'].length; i++) {
+    if(objectSelectedVignettes['selected'][i] == true){
+      nbSelectedVignette++;
+    }
+  }
+  if (nbSelectedVignette != 0) {
+    rowsTypeFilter.push(<SearchFilter division="SELECTION" quantite={nbSelectedVignette} action={this.handleTypeFilterClick}/>);
+  }
   return rowsTypeFilter;
 };
 
