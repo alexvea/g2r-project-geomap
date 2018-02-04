@@ -151,6 +151,8 @@ function getSecteur(codenaf) {
         return "SERVICES";
       }
       break;
+      default:
+        return "NO-NAF";
   };
 };
 
