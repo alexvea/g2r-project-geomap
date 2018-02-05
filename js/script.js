@@ -15,7 +15,7 @@ function sendViaEmail(){
   var currentSelectedVignettes = JSON.parse(sessionStorage.getItem("selectedVignettesLS"));
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];
-  var recipientEmail = $("recipient-name").val();
+  var recipientEmail = $("#recipient-name").val();
   if(currentSelectedVignettes != null) {
     for (key in currentSelectedVignettes["selected"]) {
       if (currentSelectedVignettes["selected"][key] == true) {
@@ -33,6 +33,7 @@ function sendViaEmail(){
      dataType: 'json',
      data:  {'data':JSON.stringify(dataToSend),'email':recipientEmail},
      success: function(data) {
+       $('#sendemail .modal-footer').html("<p class='text-success'>Message envoyé</p>");
        console.log(data);
      },
       error: function() {
@@ -65,7 +66,7 @@ $(document).ready(function() {
       scrollTop: 0
     }, 600);
   });
-  
+
   modaltype();
 
 
