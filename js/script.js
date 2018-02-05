@@ -11,10 +11,11 @@ $("#numberSliderVal").text(slideEvt.value);
 });
 
 //onclick pour envoyer la liste d'entreprises via API
-$("#viaEmail").on("click", function() {
+function sendViaEmail(){
   var currentSelectedVignettes = JSON.parse(sessionStorage.getItem("selectedVignettesLS"));
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];
+  var recipientEmail = $("recipient-name").val();
   if(currentSelectedVignettes != null) {
     for (key in currentSelectedVignettes["selected"]) {
       if (currentSelectedVignettes["selected"][key] == true) {
@@ -24,7 +25,7 @@ $("#viaEmail").on("click", function() {
   if(dataToSend.length === 0) {
       console.log("RIEN A ENVOYER !");
   } else {
-  var searchAPI = "http://127.0.0.1:3000/send/EMAIL@domain.com"+"/"+JSON.stringify(dataToSend);
+  var searchAPI = "http://127.0.0.1:3000/send/"+recipientEmail+"/"+JSON.stringify(dataToSend);
    $.ajax(searchAPI, {
      success: function(data) {
        console.log(data);
@@ -35,12 +36,13 @@ $("#viaEmail").on("click", function() {
  });
 };
 }
-});
-
+}
 //AV identification profil. TODO
 $(document).ready(function() {
   //verif internet
+
   controle();
+
 
   //modal pour choix catégorie
   $ ('#categorie').modal('show');
@@ -61,7 +63,29 @@ $(document).ready(function() {
   
   modaltype();
 
+
+$("#viaEmail").on("click", function() {
+   modalemail();
   });
+
+
+  });
+
+function modalemail() {
+  var currentSelectedVignettes=JSON.parse(sessionStorage.getItem("selectedVignettesLS"))["selected"];
+  var someTrue = currentSelectedVignettes.some(elem => elem == true);
+  if (someTrue==true){
+    var nb= 0
+    for (var i = 0;i<currentSelectedVignettes.length;i++) {
+      if (currentSelectedVignettes[i]==true){
+      nb++;
+     };
+    };
+    $('#savesvignettes > span').html(nb);
+    $('#sendemail').modal('show');
+   }
+}
+
 //Fonction champ catégorie
 function modaltype(){
   $("#profil").change( function() {
