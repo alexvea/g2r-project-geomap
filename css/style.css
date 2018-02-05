@@ -125,6 +125,10 @@ a.disabled {
 .typefiltre {
   word-wrap: break-word;
 }
+
+.custom-control-input:disabled~.custom-control-label{
+    color: #dee2e6;
+}
 /* React END */
 
 /* megaban START */

@@ -25,13 +25,18 @@ function sendViaEmail(){
   if(dataToSend.length === 0) {
       console.log("RIEN A ENVOYER !");
   } else {
-  var searchAPI = "http://127.0.0.1:3000/send/"+recipientEmail+"/"+JSON.stringify(dataToSend);
-   $.ajax(searchAPI, {
+    console.log(dataToSend);
+  var searchAPI = "http://127.0.0.1:3000/send/";
+   $.ajax({
+     url: searchAPI,
+     type: 'post',
+     dataType: 'json',
+     data:  {'data':JSON.stringify(dataToSend),'email':recipientEmail},
      success: function(data) {
        console.log(data);
-      },
+     },
       error: function() {
-        console.log("error ");
+        console.log("Erreur de connexion avec l'API send localhost.");
       }
  });
 };

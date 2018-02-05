@@ -1,9 +1,13 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+
 var stringSimilarity = require('string-similarity');
 var email = require('emailjs');
 var hostname = 'localhost';
 var port = 3000;
 var app = express();
+app.use(bodyParser.json()); //
+app.use(bodyParser.urlencoded({ extended: true }));
 var configSMTP = require('./cfg/config.json');
 
 var blackList = [
@@ -123,34 +127,35 @@ myRouter.route('/search/:nom/:adresse/').get(function(req, res) {
 //Fonction googlesearch END
 
 //fonction email START
-myRouter.route('/send/:email/:data/').get(function(req, res) {
+myRouter.route('/send').post(function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
-  var listeString = req.params.data;
-
+  var emailReceiver = req.body.email;
+  console.log("E: "+emailReceiver);
+  var listeString = req.body.data;
   var server = email.server.connect({user: configSMTP.user, password: configSMTP.password, host: configSMTP.host, tls: configSMTP.tls, port: configSMTP.port});
-
   var dataTable = "<table style='width:100%'>";
   dataTable += "<tr>";
   dataTable += "<th>Nom</th>";
   dataTable += "<th>Entreprise</th>";
   dataTable += "<th>Adresse</th>";
+  dataTable += "<th>url</th>";
   dataTable += "</tr>";
-  listeObject = JSON.parse(listeString);
+   listeObject = JSON.parse(listeString);
   for (var i in listeObject) {
-    console.log(listeObject[i].nom);
-    console.log(listeObject[i].intitule);
-    console.log(listeObject[i].adresse);
+    console.log("N: "+listeObject[i].nom+"I: "+listeObject[i].intitule+"A: "+listeObject[i].adresse+"U: "+listeObject[i].url);
     dataTable += "<tr>";
     dataTable += "<td>" + listeObject[i].nom + "</td>";
     dataTable += "<td>" + listeObject[i].intitule + "</td>";
     dataTable += "<td>" + listeObject[i].adresse + "</td>";
+    dataTable += "<td>" + listeObject[i].url + "</td>";
     dataTable += "</tr>";
   }
   dataTable += "</table>";
   var message = {
     text: listeString,
     from: "Contact <contact@map-appli.com>",
-    to: req.params.email,
+  //  to: req.params.email,
+    to:  emailReceiver,
     subject: "Liste des entreprises via map-appli",
     attachment: [
       {
@@ -167,6 +172,7 @@ myRouter.route('/send/:email/:data/').get(function(req, res) {
 //fonction email END
 
 app.use(myRouter);
+
 app.listen(port, hostname, function() {
   console.log("Mon serveur fonctionne sur http://" + hostname + ":" + port + "\n");
 });
