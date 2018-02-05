@@ -113,9 +113,36 @@
   </div>
 
   <!-- Modals START -->
+  <!-- Modals START enveloppe-->
+  <div class="modal fade" id="sendemail" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="savesvignettes">Vos sauvegardes : <span></span> </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" onsubmit="return sendViaEmail();">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="email" required class="form-control" id="recipient-name">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+          </div>
+      </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modals END enveloppe -->
  <!-- No internet modal START-->
   <div class="modal fade" id="noInternet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" ><i class="fa fa-unlink"></i> Connexion perdue !</h5>
@@ -127,12 +154,38 @@
           Vous n'avez plus internet... veuillez régler le problème avant d'utiliser l'application.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         </div>
       </div>
     </div>
   </div>
-   <!-- No internet modal END-->
+   <!-- START Modal Type -->
+     <div class="modal fade" id="categorie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header" id="">
+          <h5 class="modal-title" >
+
+
+          <h5>Quel est votre profil?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <form>
+           <select class="form-control" id="profil">
+            <option selected="true" disabled="disabled">Choisir</option>
+            <option>Stagiaire</option>
+            <option>Entreprise</option>
+            <option>Freelanceur</option>
+          </select>
+         </form>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- END Modal Type-->
   <!-- Modals END -->
   <script src="js/array_duplicate_counter.js"></script>
   <script type="text/babel" src="js/react/App.js"></script>
@@ -170,6 +223,7 @@
   <p>Projet de fin de formation @ <a href="http://g2r-formation.fr/">G2R FORMATION</a></p>
   <p>Versionning sur <a href="https://github.com/alexvea/g2r-project-geomap"><i class="fa fa-github fa-2x"></i></a></p>
   <p>Membres du projet : Assia ABED, Jean-Michel LALAGUE, Mamadou BALDE, Alexandre VEA</p>
+
 </footer>
 
 </html>
