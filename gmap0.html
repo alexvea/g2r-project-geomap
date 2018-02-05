@@ -46,19 +46,19 @@
         <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="140" height="140">
         <i class="fa fa-search fa-3x step-icons text-white"></i>
         <h3 class="p-3">Recherche</h3>
-        <p class="p-2">Fais une recherche dans ton quartier pour trouver les entreprises ayant besoin d'un site internet ou d'une refonte de site.</p>
+        <p class="p-2"><em>Géolocalise dans ton quartier</em> les entreprises ayant besoin d'un site internet ou d'une refonte de site.</p>
       </div>
       <div class="col-lg-4 text-center">
         <img class="rounded-circle" src="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP838rwHwAGlAKFEX6l7QAAAABJRU5ErkJggg==" width="140" height="140">
         <i class="fa fa-list-alt fa-3x step-icons text-white"></i>
         <h3 class="p-3">Sélectionne</h3>
-        <p class="p-2">Filtre et sélectionne les entreprises suivants leur domaine d'activité selon le type de site que tu aimerais créer ou refaire.</p>
+        <p class="p-2"><em>Filtre et sélectionne les entreprises</em> suivants leur domaine d'activité selon le type de site que tu aimerais créer ou refaire.</p>
       </div>
       <div class="col-lg-4 text-center">
         <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="140" height="140">
         <i class="fa fa-share-square fa-3x step-icons text-white"></i>
         <h3 class="p-3">Récupère</h3>
-        <p class="p-2">Reçois par email les informations des entreprises choisies afin de pouvoir les contacter et leur proposer le site de leur rêve !</p>
+        <p class="p-2"><em>Reçois par email les informations</em> des entreprises choisies afin de pouvoir les contacter et leur <em>proposer le site de leur rêve !</em></p>
       </div>
     </div>
   </div>
@@ -78,7 +78,7 @@
                   </div>
                 </div>
                 <div class="col-12 col-md-6 py-2 text-center">
-                  <span id="radiusSliderValLabel">Rayon du cercle : <span id="radiusSliderVal">500</span></span>
+                  <span id="radiusSliderValLabel">Rayon du cercle : <b><span id="radiusSliderVal">500</span>m</b></span>
                 </div>
               </div>
               <div class="row">
@@ -88,7 +88,7 @@
                   </div>
                 </div>
                 <div class="col-12 col-md-6 py-2 text-center">
-                  <span id="numberSliderValLabel">Nombre de résultats : <span id="numberSliderVal">25</span></span>
+                  <span id="numberSliderValLabel">Nombre de résultats : <b><span id="numberSliderVal">25</span></b></span>
                 </div>
               </div>
             </div>
@@ -113,6 +113,32 @@
   </div>
 
   <!-- Modals START -->
+  <!-- Modals START enveloppe-->
+  <div class="modal fade" id="sendemail" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="savesvignettes">Vos sauvegardes :<span></span> </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary">Envoyer</button>
+      </div>
+    </div>
+  </div>
+</div>
  <!-- No internet modal START-->
   <div class="modal fade" id="noInternet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
