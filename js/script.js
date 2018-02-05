@@ -42,6 +42,9 @@ $(document).ready(function() {
   //verif internet
   controle();
 
+  //modal pour choix catégorie
+  $ ('#categorie').modal('show');
+
   $(window).scroll(function() {
     if ($(window).scrollTop() <= 250) {
       $(".PaginateNav").addClass("toHide");
@@ -55,20 +58,28 @@ $(document).ready(function() {
       scrollTop: 0
     }, 600);
   });
+  
+  modaltype();
 
-});
-
+  });
+//Fonction champ catégorie
+function modaltype(){
+  $("#profil").change( function() {
+    let profilo =  $('option:selected',this).text();
+    profilo = profilo.toLowerCase();
+    document.cookie = "profil=" + profilo;
+    $('#categorie').modal('hide');
+  });
+};
 
 function enreGeo() {
   if (document.cookie.search("uuid_gmap") == -1) {
     var uuid = guid();
-    var profils = ['stagiaire','freelanceur','entreprise'];
-    var profil = profils[Math.floor((Math.random() * 3))];
-    document.cookie = "profil="+profil;
     document.cookie = "uuid_gmap="+uuid;
   };
-  var uuid = document.cookie.split(";")[1].split("=")[1]
-  var profilCookie = document.cookie.split(";")[0].split("=")[1];
+
+  var profilCookie = getCookie("profil");
+  var uuid = getCookie("uuid_gmap");
   var radius = document.getElementById('cercleradius').value;
   var nombre = parseInt(document.getElementById('limitationnumber').value);
   var cercle = [map.getCenter().lat(),map.getCenter().lng()];
@@ -133,3 +144,20 @@ function controle()
         }
       }
     };
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
