@@ -284,11 +284,13 @@ function initMap() {
 
   // Permet de déplacer le cercle
   google.maps.event.addListener(circle, 'dragend', function() {
+
     var nombre = parseInt(document.getElementById('limitationnumber').value);
     map.setCenter({lat: circle.getCenter().lat(), lng: circle.getCenter().lng()});
     updateZoom(circle);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
     //    console.log(circle.getCenter().lat()+ " " + circle.getCenter().lng());
+        geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   // MAJ le rayon du cercle.
@@ -370,6 +372,22 @@ updateZoom(circle);
       }
     });
   };
+
+  function geocodeLatLng(lat,long) {
+    var latlng = {lat: lat, lng: long};
+      var geocoder2 = new google.maps.Geocoder();
+      geocoder2.geocode({'location': latlng}, function(results, status) {
+        if (status === 'OK') {
+          if (results[1]) {
+            console.log(JSON.stringify(results[1]));
+            document.getElementById('autocomplete').value =  results[1]['formatted_address'];
+            document.getElementById('autocomplete2').value = results[1]['formatted_address'];
+          }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+  }
 
   autocomplete.addListener('place_changed', onChangeHandler);
   autocomplete2.addListener('place_changed', onChangeHandler2);
