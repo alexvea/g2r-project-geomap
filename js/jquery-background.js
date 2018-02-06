@@ -24,7 +24,7 @@ $(document).mousemove(function(e) {
   $('.clouds').parallaxXY(30, e);
 });
 
-var nombreMarkers = 50
+var nombreMarkers = 20
 var listeMarkers = [
   "commerce",
   "industrie",
@@ -36,7 +36,7 @@ var listeMarkers = [
 ];
 for (var i = 0; i < nombreMarkers; i++) {
   var nbInList = Math.floor(Math.random() * Math.floor(listeMarkers.length));
-  $(".jumbotron").append("<img src='img/" + listeMarkers[nbInList] + ".png' style='z-index:2' class='markers' />")
+  $(".carousel-item").append("<img src='img/" + listeMarkers[nbInList] + ".png' style='z-index:2' class='markers' />")
 }
 
 $('.markers').each(function() {
@@ -51,5 +51,18 @@ $('.markers').each(function() {
   });
 });
 
+$(".carousel-item").each(function() {
+	getWeather(this.id);
+});
 
-$(".jumbotron").append("<img src='img/1.png' style='opacity:0.5; z-index:3' alt='Clouds' class='clouds'/><img src='img/2.png' style='opacity:0.5; z-index:3' alt='Clouds' class='clouds'/>");
+function setWeather(weather,temp,id){
+	console.log(id+"  "+weather+" "+temp);
+	switch (true) {
+		case weather.includes("Cloudy"):
+		$("#"+id).append("<img src='img/1.png' style='opacity:0.5; z-index:3' alt='Clouds' class='clouds'/><img src='img/2.png' style='opacity:0.5; z-index:3' alt='Clouds' class='clouds'/>");
+		break;
+		//TODO others cases
+		default:
+	}
+	$("#"+id).append("<span class='h2'>Ville : "+id+" <i class='fa fa-thermometer'></i> : "+Math.floor(temp)+"</span>");
+}
