@@ -289,8 +289,7 @@ function initMap() {
     map.setCenter({lat: circle.getCenter().lat(), lng: circle.getCenter().lng()});
     updateZoom(circle);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
-    //    console.log(circle.getCenter().lat()+ " " + circle.getCenter().lng());
-        geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
+    geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   // MAJ le rayon du cercle.
@@ -300,6 +299,7 @@ function initMap() {
     updateZoom(circle);
     circle.setRadius(radius);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
+    geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   google.maps.event.addDomListener(document.getElementById("numberdiv"), 'click', function() {
@@ -308,6 +308,7 @@ function initMap() {
     updateZoom(circle);
     circle.setRadius(radius);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
+    geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   /* Ne fonctionne pas
