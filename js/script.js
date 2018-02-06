@@ -48,10 +48,14 @@ $(document).ready(function() {
   //verif internet
 
   controle();
-
-
+ 
   //modal pour choix catégorie
-  $ ('#categorie').modal('show');
+  var haveProfil =  getCookie("profil");
+if(haveProfil==""){
+  $('#categorie').modal('show');
+};
+
+  
 
   $(window).scroll(function() {
     if ($(window).scrollTop() <= 250) {
