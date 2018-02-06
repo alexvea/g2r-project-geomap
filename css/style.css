@@ -148,13 +148,29 @@ header {
 }
 
 .jumbotron {
-  position: relative;
-  background: url(../img/background.jpg) no-repeat center;
-  background-size: cover;
+  position: absolute;
+  top: 100px;
+  left: 7%;
+  width: 87%;
   padding-top: 180px;
   padding-bottom: 120px;
+  background: rgba(0, 0, 0, 0);
 }
 
+
+.carousel-item {
+  height: 100vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.slide{
+  min-height: 500px;
+}
 .ombres {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
