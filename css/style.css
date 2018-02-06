@@ -96,6 +96,10 @@ html, body {
 #mapaddress, .jumbotron {
   z-index: 9;
 }
+
+#mapaddress {
+  height: 55px;
+}
 /* googlemap END */
 
 /*React START */
