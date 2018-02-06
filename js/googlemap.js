@@ -5,7 +5,8 @@ var paris = {
   lng: 2.3522219000000177
 };
 var placeSearch,
-  autocomplete;
+  autocomplete,
+  autocomplete2;
 var retval;
 var contentMarkers = [];
 var snapshotCodeNaf = Defiant.getSnapshot(datanaf);
@@ -323,6 +324,10 @@ updateZoom(circle);
   /** @type {!HTMLInputElement} */
   (document.getElementById('autocomplete')), {types: ['geocode']});
 
+  var autocomplete2 = new google.maps.places.Autocomplete(
+  /** @type {!HTMLInputElement} */
+  (document.getElementById('autocomplete2')), {types: ['geocode']});
+
   var onChangeHandler = function() {
     $("html").animate({
       scrollTop: $(".tools").offset().top
@@ -330,6 +335,27 @@ updateZoom(circle);
     var nombre = parseInt(document.getElementById('limitationnumber').value);
     var geocoder = new google.maps.Geocoder();
     var address = document.getElementById('autocomplete').value;
+    document.getElementById('autocomplete2').value = document.getElementById('autocomplete').value;
+    geocoder.geocode({
+      'address': address
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        //fonctionne aussi    map.setCenter(new google.maps.LatLng(latitude,longitude);
+        map.setCenter({lat: latitude, lng: longitude});
+        circle.setCenter({lat: latitude, lng: longitude});
+        updateZoom(circle);
+        getList(latitude, longitude, nombre);
+      }
+    });
+  };
+
+  var onChangeHandler2 = function() {
+    var nombre = parseInt(document.getElementById('limitationnumber').value);
+    var geocoder = new google.maps.Geocoder();
+    var address = document.getElementById('autocomplete2').value;
+    document.getElementById('autocomplete').value = document.getElementById('autocomplete2').value;
     geocoder.geocode({
       'address': address
     }, function(results, status) {
@@ -346,5 +372,6 @@ updateZoom(circle);
   };
 
   autocomplete.addListener('place_changed', onChangeHandler);
+  autocomplete2.addListener('place_changed', onChangeHandler2);
 
 }
