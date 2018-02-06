@@ -160,7 +160,8 @@ header {
 
 .carousel-item {
   height: 100vh;
-  min-height: 300px;
+  min-height: 400px;
+  max-height: 1300px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
