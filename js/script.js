@@ -155,14 +155,8 @@ function IsOnline()
       if (param == false)
       {
         $('#noInternet').modal('show');
-        $('#noInternet').modal('hide');
     //    controle();
-      } else {
-      //  $('#noInternet').modal('hide');
-    //    controle();
-      }
-      else
-      {
+  } else {
         $('#noInternet').modal('hide');
       }
     }
