@@ -115,7 +115,7 @@ function getListsBoard(boardSM) {
       }
       CreateCard(lists[0].id, nom, description);
     }
-     $('#sendTrello .modal-footer').html("<p class='text-success'>Cartes créées, lien Trello :  </p><a href='https://trello.com/'> <i class='fa fa-trello fa-2x'></i> </a>");
+     $('#sendTrello .modal-footer').html("<p class='text-success mb-1'>Cartes créées, lien Trello :  </p><a href='https://trello.com/'> <i class='fa fa-trello fa-2x'></i> </a>");
   });
 };
 
