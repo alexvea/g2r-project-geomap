@@ -156,6 +156,10 @@ function IsOnline()
       {
         $('#noInternet').modal('show');
       }
+      else
+      {
+        $('#noInternet').modal('hide');
+      }
     }
 function controle()
     {
