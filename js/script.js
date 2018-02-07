@@ -46,16 +46,16 @@ function sendViaEmail(){
 //AV identification profil. TODO
 $(document).ready(function() {
   //verif internet
-
+  setUrl();
   controle();
- 
+
   //modal pour choix catégorie
   var haveProfil =  getCookie("profil");
 if(haveProfil==""){
   $('#categorie').modal('show');
 };
 
-  
+
 
   $(window).scroll(function() {
     if ($(window).scrollTop() <= 250) {
@@ -194,4 +194,11 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function setUrl(){
+$('.social-network li a').each(function(){
+    this.href = this.href + window.location;
+});
+
 }
