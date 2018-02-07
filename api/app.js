@@ -93,6 +93,9 @@ myRouter.route('/search/:nom/:adresse/').get(function(req, res) {
                 sanshttp = url.replace("http://", "").replace("https://", "").replace(".com", "").replace(".fr", "").replace("www.", "");
                 sanshttp = sanshttp.split("/")[0];
                 score = stringSimilarity.compareTwoStrings(req.params.nom, sanshttp);
+                // vérif si protocole présent
+                if(url.indexOf("https://") === -1 || url.indexOf("https://") === -1){
+                  url = "http://"+url;
                 switch (true) {
                   case(score == 0):
                     console.log("\x1b[31m%s\x1b[0m", score + "  " + req.params.nom + " " + sanshttp + " " + url);
@@ -112,7 +115,6 @@ myRouter.route('/search/:nom/:adresse/').get(function(req, res) {
                 }
               }
             });
-
           };
         });
       };
