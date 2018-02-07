@@ -115,15 +115,18 @@ function getWebSite(nom, adresse, id) {
 function resetProgressbar() {
   $('.progress-bar').width(0);
 }
+
 function progressbar() {
   var total = sessionStorage.getItem("countSearch");
-  var pourcentage = Math.round($('.progress-bar').parent().width() / total) * 0.89;
+  var pourcentage = $('.progress-bar').parent().width() / total * 1.2;
   var currentProgress = $(".progress-bar").width() / $('.progress-bar').parent().width() * 100;
   var nextProgress = currentProgress + pourcentage;
   $('.progress-bar').width(nextProgress + '%');
 }
+
 function ajoutInfoSearchData(id, data) {
-  progressbar();
+  setTimeout(function(){ progressbar(); }, 750);
+
   var currentData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   if (data == "{}") {
     currentData[id].url = "NA";

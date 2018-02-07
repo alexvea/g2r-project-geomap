@@ -337,8 +337,8 @@ ul a {
 .progress {
   position: absolute;
   top:100%;
-  left: 0;
-  width: 100%;
+  left: -1px;
+  width: 101%;
   height: 3px;
   float:left;
 }
