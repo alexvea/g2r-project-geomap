@@ -5,7 +5,8 @@ var paris = {
   lng: 2.3522219000000177
 };
 var placeSearch,
-  autocomplete;
+  autocomplete,
+  autocomplete2;
 var retval;
 var contentMarkers = [];
 var snapshotCodeNaf = Defiant.getSnapshot(datanaf);
@@ -298,11 +299,12 @@ function initMap() {
 
   // Permet de déplacer le cercle
   google.maps.event.addListener(circle, 'dragend', function() {
+
     var nombre = parseInt(document.getElementById('limitationnumber').value);
     map.setCenter({lat: circle.getCenter().lat(), lng: circle.getCenter().lng()});
     updateZoom(circle);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
-    //    console.log(circle.getCenter().lat()+ " " + circle.getCenter().lng());
+    geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   // MAJ le rayon du cercle.
@@ -312,6 +314,7 @@ function initMap() {
     updateZoom(circle);
     circle.setRadius(radius);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
+    geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   google.maps.event.addDomListener(document.getElementById("numberdiv"), 'click', function() {
@@ -320,6 +323,7 @@ function initMap() {
     updateZoom(circle);
     circle.setRadius(radius);
     getList(circle.getCenter().lat(), circle.getCenter().lng(), nombre);
+    geocodeLatLng(circle.getCenter().lat(),circle.getCenter().lng());
   });
 
   /* Ne fonctionne pas
@@ -338,6 +342,10 @@ updateZoom(circle);
   /** @type {!HTMLInputElement} */
   (document.getElementById('autocomplete')), {types: ['geocode']});
 
+  var autocomplete2 = new google.maps.places.Autocomplete(
+  /** @type {!HTMLInputElement} */
+  (document.getElementById('autocomplete2')), {types: ['geocode']});
+
   var onChangeHandler = function() {
     $("html").animate({
       scrollTop: $(".tools").offset().top
@@ -345,6 +353,7 @@ updateZoom(circle);
     var nombre = parseInt(document.getElementById('limitationnumber').value);
     var geocoder = new google.maps.Geocoder();
     var address = document.getElementById('autocomplete').value;
+    document.getElementById('autocomplete2').value = document.getElementById('autocomplete').value;
     geocoder.geocode({
       'address': address
     }, function(results, status) {
@@ -360,6 +369,43 @@ updateZoom(circle);
     });
   };
 
+  var onChangeHandler2 = function() {
+    var nombre = parseInt(document.getElementById('limitationnumber').value);
+    var geocoder = new google.maps.Geocoder();
+    var address = document.getElementById('autocomplete2').value;
+    document.getElementById('autocomplete').value = document.getElementById('autocomplete2').value;
+    geocoder.geocode({
+      'address': address
+    }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        var latitude = results[0].geometry.location.lat();
+        var longitude = results[0].geometry.location.lng();
+        //fonctionne aussi    map.setCenter(new google.maps.LatLng(latitude,longitude);
+        map.setCenter({lat: latitude, lng: longitude});
+        circle.setCenter({lat: latitude, lng: longitude});
+        updateZoom(circle);
+        getList(latitude, longitude, nombre);
+      }
+    });
+  };
+
+  function geocodeLatLng(lat,long) {
+    var latlng = {lat: lat, lng: long};
+      var geocoder2 = new google.maps.Geocoder();
+      geocoder2.geocode({'location': latlng}, function(results, status) {
+        if (status === 'OK') {
+          if (results[1]) {
+            console.log(JSON.stringify(results[1]));
+            document.getElementById('autocomplete').value =  results[1]['formatted_address'];
+            document.getElementById('autocomplete2').value = results[1]['formatted_address'];
+          }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+  }
+
   autocomplete.addListener('place_changed', onChangeHandler);
+  autocomplete2.addListener('place_changed', onChangeHandler2);
 
 }

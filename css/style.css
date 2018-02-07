@@ -80,10 +80,15 @@ html, body {
 
 /*  sliders END */
 /* googlemap START */
-#autocomplete {
+.search-bar-main {
   height: 60px;
   font-size: 1.2em;
 }
+.search-bar-little {
+  height: 38px;
+  font-size: 1em;
+}
+
 #map {
   min-height: 500px;
   height: 100%;
@@ -91,6 +96,11 @@ html, body {
 #mapaddress, .jumbotron {
   z-index: 9;
 }
+
+#mapaddress {
+  height: 55px;
+}
+
 /* googlemap END */
 
 /*React START */
@@ -102,7 +112,7 @@ html, body {
   opacity:0.5;
   width:100%;
   position:fixed;
-  z-index:9999;
+  z-index:1000;
   bottom:0px;
   text-align: center
 }
@@ -148,13 +158,29 @@ header {
 }
 
 .jumbotron {
-  position: relative;
-  background: url(../img/background.jpg) no-repeat center;
-  background-size: cover;
+  position: absolute;
+  top: 13%;
+  left: 7%;
+  width: 87%;
   padding-top: 180px;
   padding-bottom: 120px;
+  background: rgba(0, 0, 0, 0);
 }
 
+
+.carousel-item {
+  height: 100vh;
+  max-height: 550px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.slide{
+  min-height: 500px;
+}
 .ombres {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -344,3 +370,13 @@ ul a {
 }
 
 /* barre de progression END */
+
+@media screen and (min-width: 200px) and (max-width: 640px) {
+  .carousel-item {
+  max-height: 650px;
+  }
+  .jumbotron{
+  top: 5%;
+  }
+}
+

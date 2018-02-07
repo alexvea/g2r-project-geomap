@@ -11,10 +11,11 @@ $("#numberSliderVal").text(slideEvt.value);
 });
 
 //onclick pour envoyer la liste d'entreprises via API
-$("#viaEmail").on("click", function() {
+function sendViaEmail(){
   var currentSelectedVignettes = JSON.parse(sessionStorage.getItem("selectedVignettesLS"));
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];
+  var recipientEmail = $("#recipient-name").val();
   if(currentSelectedVignettes != null) {
     for (key in currentSelectedVignettes["selected"]) {
       if (currentSelectedVignettes["selected"][key] == true) {
@@ -30,8 +31,9 @@ $("#viaEmail").on("click", function() {
      url: searchAPI,
      type: 'post',
      dataType: 'json',
-     data:  {'data':JSON.stringify(dataToSend),'email':"email@domain.com"},
+     data:  {'data':JSON.stringify(dataToSend),'email':recipientEmail},
      success: function(data) {
+       $('#sendemail .modal-footer').html("<p class='text-success'>Message envoyé</p>");
        console.log(data);
      },
       error: function() {
@@ -40,12 +42,22 @@ $("#viaEmail").on("click", function() {
  });
 };
 }
-});
+}
+
 
 //AV identification profil. TODO
 $(document).ready(function() {
   //verif internet
+  setUrl();
   controle();
+
+  //modal pour choix catégorie
+  var haveProfil =  getCookie("profil");
+if(haveProfil==""){
+  $('#categorie').modal('show');
+};
+
+
 
   $(window).scroll(function() {
     if ($(window).scrollTop() <= 250) {
@@ -61,19 +73,53 @@ $(document).ready(function() {
     }, 600);
   });
 
+  modaltype();
+
+
+$("#viaEmail").on("click", function() {
+   modalemail();
 });
 
+$("#viaTrello").on("click", function() {
+  modalTrello();
+});
+
+
+});  //document ready FIN
+
+function modalemail() {
+  var currentSelectedVignettes=JSON.parse(sessionStorage.getItem("selectedVignettesLS"))["selected"];
+  var someTrue = currentSelectedVignettes.some(elem => elem == true);
+  if (someTrue==true){
+    var nb= 0
+    for (var i = 0;i<currentSelectedVignettes.length;i++) {
+      if (currentSelectedVignettes[i]==true){
+      nb++;
+     };
+    };
+    $('#savesvignettes > span').html(nb);
+    $('#sendemail').modal('show');
+   }
+}
+
+//Fonction champ catégorie
+function modaltype(){
+  $("#profil").change( function() {
+    let profilo =  $('option:selected',this).val();
+    profilo = profilo.toLowerCase();
+    document.cookie = "profil=" + profilo;
+    $('#categorie').modal('hide');
+  });
+};
 
 function enreGeo() {
   if (document.cookie.search("uuid_gmap") == -1) {
     var uuid = guid();
-    var profils = ['stagiaire','freelanceur','entreprise'];
-    var profil = profils[Math.floor((Math.random() * 3))];
-    document.cookie = "profil="+profil;
     document.cookie = "uuid_gmap="+uuid;
   };
-  var uuid = document.cookie.split(";")[1].split("=")[1]
-  var profilCookie = document.cookie.split(";")[0].split("=")[1];
+
+  var profilCookie = getCookie("profil");
+  var uuid = getCookie("uuid_gmap");
   var radius = document.getElementById('cercleradius').value;
   var nombre = parseInt(document.getElementById('limitationnumber').value);
   var cercle = [map.getCenter().lat(),map.getCenter().lng()];
@@ -115,6 +161,9 @@ function IsOnline()
       if (param == false)
       {
         $('#noInternet').modal('show');
+    //    controle();
+  } else {
+        $('#noInternet').modal('hide');
       }
     }
 function controle()
@@ -138,3 +187,27 @@ function controle()
         }
       }
     };
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function setUrl(){
+$('.social-network li a').each(function(){
+    this.href = this.href + window.location;
+});
+
+}
