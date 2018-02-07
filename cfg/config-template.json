@@ -1,5 +1,6 @@
 var CONFIG = {
-  "googleApiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  "googleApiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "TrelloApiKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 

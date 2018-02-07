@@ -43,6 +43,8 @@ function sendViaEmail(){
 };
 }
 }
+
+
 //AV identification profil. TODO
 $(document).ready(function() {
   //verif internet
@@ -76,10 +78,14 @@ if(haveProfil==""){
 
 $("#viaEmail").on("click", function() {
    modalemail();
-  });
+});
+
+$("#viaTrello").on("click", function() {
+  modalTrello();
+});
 
 
-  });
+});  //document ready FIN
 
 function modalemail() {
   var currentSelectedVignettes=JSON.parse(sessionStorage.getItem("selectedVignettesLS"))["selected"];
