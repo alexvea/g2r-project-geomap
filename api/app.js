@@ -96,6 +96,10 @@ myRouter.route('/search/:nom/:adresse/').get(function(req, res) {
                 // vérif si protocole présent
                 if(url.indexOf("https://") === -1 || url.indexOf("https://") === -1){
                   url = "http://"+url;
+                }
+                var urlSplited =  url.split("/");
+                url = "http://"+urlSplited[2];
+
                 switch (true) {
                   case(score == 0):
                     console.log("\x1b[31m%s\x1b[0m", score + "  " + req.params.nom + " " + sanshttp + " " + url);
