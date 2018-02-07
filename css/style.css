@@ -204,8 +204,8 @@ header {
 
 .action-icons {
   color: grey;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 0px;
 }
 
 .fa-beat {
@@ -354,6 +354,23 @@ ul a {
   margin: 0 auto;
 }
 /* 3 STEPS explanation END */
+
+/* barre de progression START */
+.card-footer {
+  position: relative;
+
+}
+.progress {
+  position: absolute;
+  top:100%;
+  left: -1px;
+  width: 101%;
+  height: 3px;
+  float:left;
+}
+
+/* barre de progression END */
+
 @media screen and (min-width: 200px) and (max-width: 640px) {
   .carousel-item {
   max-height: 650px;
@@ -362,3 +379,4 @@ ul a {
   top: 5%;
   }
 }
+

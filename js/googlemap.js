@@ -113,8 +113,21 @@ function getWebSite(nom, adresse, id) {
     }
   });
 };
+function resetProgressbar() {
+  $('.progress-bar').width(0);
+}
+
+function progressbar() {
+  var total = sessionStorage.getItem("countSearch");
+  var pourcentage = $('.progress-bar').parent().width() / total * 1.2;
+  var currentProgress = $(".progress-bar").width() / $('.progress-bar').parent().width() * 100;
+  var nextProgress = currentProgress + pourcentage;
+  $('.progress-bar').width(nextProgress + '%');
+}
 
 function ajoutInfoSearchData(id, data) {
+  setTimeout(function(){ progressbar(); }, 750);
+
   var currentData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   if (data == "{}") {
     currentData[id].url = "NA";
@@ -179,6 +192,7 @@ function getNafIntitule(id, codenaf) {
 
 // Fonction permettant de récuperer les infos de datainfogreffe
 function getList(lat, lng, nb) {
+  resetProgressbar();
   var contentMarkers = [];
   var radius = document.getElementById('cercleradius').value;
   var nombre = nb;
@@ -223,6 +237,7 @@ function getList(lat, lng, nb) {
 
     } //for
     enreGeo();
+    sessionStorage.setItem('countSearch',contentMarkers.length);
     sessionStorage.setItem('searchdataLS', JSON.stringify(contentMarkers));
     $(".card-pagination > div").removeClass("border");
   });
