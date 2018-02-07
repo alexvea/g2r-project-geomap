@@ -48,14 +48,14 @@ $(document).ready(function() {
   //verif internet
 
   controle();
- 
+
   //modal pour choix catégorie
   var haveProfil =  getCookie("profil");
 if(haveProfil==""){
   $('#categorie').modal('show');
 };
 
-  
+
 
   $(window).scroll(function() {
     if ($(window).scrollTop() <= 250) {
@@ -99,7 +99,7 @@ function modalemail() {
 //Fonction champ catégorie
 function modaltype(){
   $("#profil").change( function() {
-    let profilo =  $('option:selected',this).text();
+    let profilo =  $('option:selected',this).val();
     profilo = profilo.toLowerCase();
     document.cookie = "profil=" + profilo;
     $('#categorie').modal('hide');
@@ -155,6 +155,11 @@ function IsOnline()
       if (param == false)
       {
         $('#noInternet').modal('show');
+        $('#noInternet').modal('hide');
+    //    controle();
+      } else {
+      //  $('#noInternet').modal('hide');
+    //    controle();
       }
     }
 function controle()
