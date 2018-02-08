@@ -14,8 +14,6 @@ function modalTrello() {
 }
 
 function sendViaTrello() {
-  var uid = getCookie("uuid_gmap");
-  writeUser(email,uid,"trello");
   var currentSelectedVignettes = JSON.parse(sessionStorage.getItem("selectedVignettesLS"));
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];
@@ -36,7 +34,8 @@ function sendViaTrello() {
         name: "Trello API - Simple Map",
         scope: {
           read: true,
-          write: true
+          write: true,
+          account: true
         },
         expiration: "never",
         persist: "true",
@@ -132,9 +131,17 @@ function CreateCard(ListId, name, desc) {
   });
 };
 
-
+function getEmail(){
+  Trello.get("members/me", {
+    fields: "email"
+  }, function(data, err) {
+    var uid = getCookie("uuid_gmap");
+    writeUser(data.email,uid,"trello");
+  }
+)}
 
 function onAuthorizeSuccessful() {
+  getEmail();
   getBoard();
 };
 // TRELLO END
