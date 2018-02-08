@@ -16,6 +16,9 @@ function sendViaEmail(){
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];
   var recipientEmail = $("#recipient-name").val();
+  var uid = getCookie("uuid_gmap");
+
+  writeUserMail(recipientEmail,uid);
   if(currentSelectedVignettes != null) {
     for (key in currentSelectedVignettes["selected"]) {
       if (currentSelectedVignettes["selected"][key] == true) {

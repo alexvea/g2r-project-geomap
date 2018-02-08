@@ -30,3 +30,16 @@ function writeUserData(uuid, date, profilCookie, radius, nombre,cercle) {
   sauvegarde['/historique/' + newPostKey] = infoEnregistrement;
   firebase.database().ref().update(sauvegarde);
 }
+
+function writeUserMail(email,id) {
+  var infoEnregistrement = {
+      id: id,
+      email: email
+  };
+  var newPostKey = firebase.database().ref().push().key;
+  var sauvegarde = {};
+  //console.log(sauvegarde);
+  sauvegarde['/email/' + newPostKey] = infoEnregistrement;
+  firebase.database().ref().update(sauvegarde);
+}
+
