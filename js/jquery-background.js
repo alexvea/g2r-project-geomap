@@ -64,5 +64,9 @@ function setWeather(weather,temp,id){
 		//TODO others cases
 		default:
 	}
-	$("#"+id).append("<span class='h2 text-light pl-3 pt-2'>"+id+" <i class='fa fa-thermometer'></i> "+Math.floor(temp)+" °C</span>");
+	if(id == "Lyon"){
+		$("#"+id).append("<span class='h2 text-primary pl-3 pt-2'>"+id+" <i class='fa fa-thermometer'></i> "+Math.floor(temp)+" °C</span>");
+	} else {
+		$("#"+id).append("<span class='h2 text-white pl-3 pt-2'>"+id+" <i class='fa fa-thermometer'></i> "+Math.floor(temp)+" °C</span>");
+	}
 }
