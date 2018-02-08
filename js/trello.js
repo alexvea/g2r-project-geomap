@@ -74,7 +74,7 @@ function getBoard() {
   Trello.get("members/me/boards", {
     fields: "id,name"
   }, function(boards, err) {
-    console.log(err);
+//    console.log(err);
     var found = false;
     for (var i = 0; i < boards.length; i++) {
       if (boards[i].name == 'Simple Map - Trello') {
@@ -97,12 +97,11 @@ function getListsBoard(boardSM) {
   Trello.get("boards/" + boardSM + "/lists", {
     fields: "name"
   }, function(lists, err) {
-    console.log(err);
+//    console.log(err);
     var found = false;
     console.log("Premiere liste: " + lists[0].id);
     var dataToSend = JSON.parse(sessionStorage.getItem("dataToSend"));
     for (var i = 0; i < dataToSend.length; i++) {
-      console.log(dataToSend[i]);
       let nom = dataToSend[i].nom;
       let intitule = dataToSend[i].intitule;
       let division = dataToSend[i].division;
@@ -127,7 +126,7 @@ function CreateCard(ListId, name, desc) {
     idList: ListId,
     keepFromSource: 'all'
   }, function() {
-    console.log("Carte created.");
+    console.log("Carte créée.");
   });
 };
 
