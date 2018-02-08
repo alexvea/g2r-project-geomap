@@ -46,7 +46,7 @@ class Vignette extends React.Component {
                     <span id={"toto"+this.props.cle} className="website"><u>Site internet :</u></span>
                     <div className={"position-div-loader " + (this.props.url ? "": " loader "+this.props.division)}>
                     </div>
-                    <a className={"position-div-loader " + (this.props.url == "NA" ? "disabled": "")} href={(this.props.url == "NA" ? "": this.props.url)}>
+                    <a className={"position-div-loader " + (this.props.url == "NA" ? "disabled": "")} href={(this.props.url == "NA" ? "": this.props.url)} target='_blank'>
                     <i className={"fa fa-2x " + (this.props.url == "NA" ? "fa-times": ((this.props.url != "" && this.props.url !="NA") ? "fa-link": ""))}></i>
                     </a>
                   </blockquote>
