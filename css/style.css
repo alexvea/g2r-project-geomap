@@ -368,6 +368,9 @@ ul a {
   height: 3px;
   float:left;
 }
+#map{
+  border: 1px solid black;
+}
 
 /* barre de progression END */
 
