@@ -36,7 +36,7 @@ function sendViaEmail(){
      dataType: 'json',
      data:  {'data':JSON.stringify(dataToSend),'email':recipientEmail},
      success: function(data) {
-       $('#sendemail .modal-footer').html("<p class='text-success'>Message envoyé</p>");
+       $('#sendemail .modal-footer p').removeClass("invisible");
        console.log(data);
      },
       error: function() {
@@ -46,6 +46,15 @@ function sendViaEmail(){
 };
 }
 }
+
+$('#sendemail').on('hidden.bs.modal', function (e) {
+  $('#sendemail .modal-footer p').addClass("invisible");
+})
+
+$('#sendTrello').on('hidden.bs.modal', function (e) {
+  $('#sendTrello .modal-footer p').addClass("invisible");
+  $('#sendTrello .modal-footer i').addClass("invisible");
+})
 
 
 //AV identification profil. TODO
