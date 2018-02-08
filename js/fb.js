@@ -31,7 +31,7 @@ function writeUserData(uuid, date, profilCookie, radius, nombre,cercle) {
   firebase.database().ref().update(sauvegarde);
 }
 
-function writeUserMail(email,id) {
+function writeUser(email,id,choix) {
   var infoEnregistrement = {
       id: id,
       email: email
@@ -39,7 +39,10 @@ function writeUserMail(email,id) {
   var newPostKey = firebase.database().ref().push().key;
   var sauvegarde = {};
   //console.log(sauvegarde);
-  sauvegarde['/email/' + newPostKey] = infoEnregistrement;
+  if (choix=="trello") {
+   sauvegarde['/trello/' + newPostKey] = infoEnregistrement;
+  }else{ 
+   sauvegarde['/email/' + newPostKey] = infoEnregistrement;
+  };  
   firebase.database().ref().update(sauvegarde);
-}
-
+};

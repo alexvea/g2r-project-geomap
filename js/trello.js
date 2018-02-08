@@ -14,6 +14,8 @@ function modalTrello() {
 }
 
 function sendViaTrello() {
+  var uid = getCookie("uuid_gmap");
+  writeUser(email,uid,"trello");
   var currentSelectedVignettes = JSON.parse(sessionStorage.getItem("selectedVignettesLS"));
   var currentsearchData = JSON.parse(sessionStorage.getItem("searchdataLS"));
   var dataToSend = [];

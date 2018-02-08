@@ -17,8 +17,8 @@ function sendViaEmail(){
   var dataToSend = [];
   var recipientEmail = $("#recipient-name").val();
   var uid = getCookie("uuid_gmap");
-
-  writeUserMail(recipientEmail,uid);
+  var choix ="email";
+  writeUser(recipientEmail,uid,choix);
   if(currentSelectedVignettes != null) {
     for (key in currentSelectedVignettes["selected"]) {
       if (currentSelectedVignettes["selected"][key] == true) {
