@@ -9,7 +9,7 @@ function modalTrello() {
      };
     };
     $('#savesvignettes > span').html(nb);
-    $('#sendTrello').modal('show');
+    $('#sendTrello').modal();
    }
 }
 
