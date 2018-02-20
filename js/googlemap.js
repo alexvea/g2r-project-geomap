@@ -4,6 +4,10 @@ var paris = {
   lat: 48.856614,
   lng: 2.3522219000000177
 };
+var optionsAutocomplete = {
+  componentRestrictions: {country: "fr"},
+  types: ['geocode']
+};
 var placeSearch,
   autocomplete,
   autocomplete2;
@@ -340,11 +344,11 @@ updateZoom(circle);
   // fonctionnalité de recherche d'adresse, puis recentrage
   var autocomplete = new google.maps.places.Autocomplete(
   /** @type {!HTMLInputElement} */
-  (document.getElementById('autocomplete')), {types: ['geocode']});
+  (document.getElementById('autocomplete')), optionsAutocomplete);
 
   var autocomplete2 = new google.maps.places.Autocomplete(
   /** @type {!HTMLInputElement} */
-  (document.getElementById('autocomplete2')), {types: ['geocode']});
+  (document.getElementById('autocomplete2')), optionsAutocomplete);
 
   var onChangeHandler = function() {
     $("html").animate({
